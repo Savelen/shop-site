@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Shop</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="Style/Style.css">
+</head>
+
+<body>
+	<header>
+		<!-- Логотип и Меню -->
+		<div class="menu">
+			<a href="#"><img class="card" src="Style/Image/icon/shopping-cart.png" alt=""></a>
+			<div class="menu_sub">
+				<a href="#">Главная</a>
+				<a href="#">Товары</a>
+			</div>
+		</div>
+
+		<!-- Приветственный Текст -->
+		<div class="message">
+			<h1>Наша одежда, ваш комфорт</h1>
+			<p>
+				Текст Рыба: Явные признаки победы институционализации
+				подвергнуты целой серии независимых исследований.Высокое качество позиционных исследований
+			</p>
+		</div>
+		<div class="arrow"><span class="arrow-down"></span></div>
+	</header>
+	<!-- Католог товаров -->
+	<section class="item">
+		<!-- Форма выбота типа продукта -->
+		<div class="backgraung_item"></div>
+		<div class="item__menu">
+			<div class="item-checkbox">
+				<label class="item__gender__label">
+					<input type="checkbox" value="1" name="men" data-once="1">
+					<span class="checkmark"></span>
+					МУЖСКАЯ
+				</label>
+				<label class="item__gender__label">
+					<input type="checkbox" value="1" name="women" data-once="1">
+					<span class="checkmark"></span>
+					ЖЕНСКАЯ
+				</label>
+				<label class="item__gender__label">
+					<input type="checkbox" value="2" name="kids" data-once="1">
+					<span class="checkmark"></span>
+					ДЕТСКАЯ
+				</label>
+				<button class="all_item" type="submit" name="item_all">
+					ПОКАЗАТЬ ВСЕ ТОВАРЫ
+				</button>
+			</div>
+		</div>
+
+		<!-- Каталог -->
+		<div class="catalog__item">
+			<div class="men">
+				<div class="catalog__men">
+					<p class="header__catalog__1">МУЖСКАЯ</p>
+					<div class="border__1"></div>
+				</div>
+				<!-- PHP код генерирует контент -->
+				<!-- HTML/CSS и JS Слот товара-->
+				<div class="pagination pagination_men" data-gender="slot-men">
+					<span class="arrow arrow-left" data-gender="men" data-start='0' data-get='3' data-go='-3'></span>
+					<span class="text">0/0</span>
+					<span class="arrow arrow-right" data-gender="men" data-start='3' data-get='3' data-go='3'></span>
+				</div>
+				<div class="slot slot-men">
+					<!-- Слот товара -->
+					<div class="slot_item__hidden">
+						<div class="select">
+							<select class="size__item" name="kyky">
+								<option disabled selected> РАЗМЕР</option>
+							</select>
+							<span class="arrow"></span>
+						</div>
+						<div class="color_item">
+							<!-- js предлогает выбрать цвет -->
+						</div>
+						<div class="item__image"></div>
+						<div class="name__item"></div>
+						<div class="cost__item"></div>
+					</div>
+
+					<!-- Конец слот товара -->
+				</div>
+			</div>
+			<div class="women">
+				<div class="catalog__women">
+					<p class="header__catalog__2">ЖЕНСКАЯ</p>
+					<div class="border__2"></div>
+				</div>
+				<div class="pagination pagination_women" data-gender="slot-women">
+					<span class="arrow arrow-left" data-gender="women" data-start='0' data-get='3' data-go='-3'></span>
+					<span class="text">0/0</span>
+					<span class="arrow arrow-right" data-gender="women" data-start='3' data-get='3' data-go='3'></span>
+				</div>
+				<div class="slot slot-women"></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- О нас -->
+	<section class="about">
+		<!-- о нас кратко -->
+		<div>
+			<h1>О НАС</h1>
+			<p>
+				Текст Рыба: Внезапно, интерактивные прототипы, превозмогая сложившуюся непростую экономическую ситуацию,
+				объединены в целые кластеры себе подобных. Вот вам яркий пример современных тенденций - перспективное
+				планирование способствует подготовке и реализации системы массового участия. Прежде всего, сложившаяся
+				структура организации обеспечивает актуальность как самодостаточных, так и внешне зависимых концептуальных
+				решений.
+			</p>
+		</div>
+	</section>
+
+	<!-- Футер -->
+	<footer>
+		<!-- социальные сети -->
+		<div class="soc_web">
+			<a href="#"><img src="Style/Image/soc/Twitter.png" alt="" class="twitter"></a>
+			<a href="#"><img src="Style/Image/soc/facebook.png" alt="" class="facebook"></a>
+			<a href="#"><img src="Style/Image/soc/vk.png" alt="" class="VK"></a>
+		</div>
+
+		<!-- Список ссылок -->
+		<div class="footer_menu">
+			<div>
+				<a href="#" class="futer__menu"> ПОМОЩЬ </a><span>|</span>
+				<a href="#" class="futer__menu"> ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ </a><span>|</span>
+				<a href="#" class="futer__menu"> О НАС </a><span>|</span>
+				<a href="#" class="futer__menu"> КОНТАКТЫ</a>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript">
+		let down = document.querySelector('span.arrow-down');
+		down.addEventListener("click", () => document.querySelector('section.item').scrollIntoView({ behavior: "smooth" }));
+	</script>
+	<script src="js/pagination.js"></script>
+	<script src="js/travel-pagination.js"></script>
+	<script type="text/javascript">
+		// Первая генерация, а также показ и сокрытие блоков с карточками
+		function show_catalog(item) {
+			let count = 0;
+			item.forEach(i => {
+				if (i.name == 'men' || i.name == 'women') count += Number(i.value);
+			});
+			if (count < 2) {
+				document.querySelector('div.catalog__item').style.display = 'inherit';
+			}
+			else if (count == 2) {
+				document.querySelector('div.catalog__item').style.display = 'none';
+			}
+		}
+		let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
+		label.forEach(lab => {
+			lab.addEventListener("click", () => {
+				if (lab.value == 1) {
+					lab.value = 0;
+					show_catalog(label);
+					document.querySelector('div.' + lab.name).style.display = 'block';
+					if (lab.dataset.once == 1) {
+						lab.dataset.once = 0;
+						let rem = document.querySelector('div.' + lab.name).querySelectorAll('div.slot_item');
+						rem.forEach(r => r.parentElement.removeChild(r));
+						ajax_conect(lab.name);
+						count_list(0, 'u');
+					}
+				}
+				else if (lab.value == 0) {
+					lab.value = 1;
+					show_catalog(label);
+					document.querySelector('div.' + lab.name).style.display = 'none';
+				}
+				else if (lab.name == "kids") {
+					if (lab.value == 2) {
+						lab.value = 3;
+						// говорим показывать детскую одежду
+						let kid = document.querySelectorAll('div.pagination');
+						kid.forEach(k => {
+							k.dataset.kids = '1';
+							let a = k.querySelectorAll('span.arrow');
+							a[0].dataset.start = 0;
+							a[1].dataset.start = 3;
+						});
+						// удаляем взрослую одежду
+						let rem = document.querySelectorAll('div.slot_item');
+						rem.forEach(r => r.parentElement.removeChild(r));
+						// выдаём детскую
+						ajax_conect("men,women", 0, 3, 1);
+						count_list(0, 'u', 1);
+					} else if (lab.value == 3) {
+						lab.value = 2;
+						// готовим показывать взрослую одежду
+						let kid = document.querySelectorAll('div.pagination');
+						kid.forEach(k => {
+							k.dataset.kids = '0';
+							let a = k.querySelectorAll('span.arrow');
+							a[0].dataset.start = 0;
+							a[1].dataset.start = 3;
+						});
+						// удаляем дктскую одежду
+						let rem = document.querySelectorAll('div.slot_item');
+						rem.forEach(r => r.parentElement.removeChild(r));
+						// генерируем взрослую
+						ajax_conect("men,women");
+						count_list(0, 'u');
+					}
+
+				}
+			});
+		});
+	</script>
+	<script>
+		// смена картинки при нажатии на круги с цветом товара
+		function go() {
+			let img_arr = document.querySelectorAll('li');
+			img_arr.forEach(link => {
+				link.addEventListener("click", () => {
+					let img = link.querySelector('a');
+					let up_elem = (iterac = 2) => {
+						let parent_el = link.parentElement;
+						for (i = 0; i < iterac; i++) {
+							parent_el = parent_el.parentElement;
+						}
+						return parent_el;
+					}
+					let old_img = up_elem().querySelector('img');
+					old_img.addEventListener("animationend", () => {
+						old_img.style.animationName = '';
+					});
+					old_img.style = "animation: hidden 0.4s linear 1 forwards";
+					setTimeout(() => {
+						old_img.src = img.href;
+					}, 200);
+
+				});
+			})
+		}
+	</script>
+</body>
+
+</html>
