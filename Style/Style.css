@@ -213,7 +213,7 @@ div.catalog__women div.border__2 {
   border-top: solid 2px;
   border-color: #cccccc;
 }
-div.catalog__men p.header__catalog__1 {
+div.catalog__men p.catalog-men__header {
   font-size: 1.2em;
   font-weight: 500;
 }
@@ -235,7 +235,7 @@ div.pagination {
   font-size: 18px;
   font-weight: bold;
 }
-div.pagination_men {
+div.pagination-men {
   justify-content: flex-end;
 }
 div.pagination_women {
@@ -277,7 +277,7 @@ div.slot_message {
   margin-bottom: 45px;
   /*min-height: 397px;*/
 }
-div.slot_item__hidden {
+div.slot-item-hidden {
   display: none;
 }
 div.slot_item {
