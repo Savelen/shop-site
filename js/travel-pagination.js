@@ -19,7 +19,7 @@ function count_list(now, gender, kids = 0) {
 						text.textContent = (now / 3 + 1) + "/" + page;
 					}
 					if (count == "women" && gender == "women" || gender == "u") {
-						let p = document.querySelector('div.pagination_women');
+						let p = document.querySelector('div.pagination-women');
 						let text = p.querySelector('span.text');
 						if ((now / 3 + 1) >= page) text.dataset.go = false;
 						else text.dataset.go = true;
@@ -31,7 +31,7 @@ function count_list(now, gender, kids = 0) {
 				let p = document.querySelector('div.pagination-men');
 				let text = p.querySelector('span.text');
 				text.textContent = "0/0";
-				p = document.querySelector('div.pagination_women');
+				p = document.querySelector('div.pagination-women');
 				text = p.querySelector('span.text');
 				text.textContent = "0/0";
 			}

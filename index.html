@@ -34,24 +34,28 @@
 		<div class="backgraung-item"></div>
 		<div class="item__menu">
 			<div class="item-checkbox">
-				<label class="item-checkbox__label">
-					<input type="checkbox" value="1" name="men" data-once="1">
-					<span class="checkmark"></span>
-					МУЖСКАЯ
-				</label>
-				<label class="item-checkbox__label">
-					<input type="checkbox" value="1" name="women" data-once="1">
-					<span class="checkmark"></span>
-					ЖЕНСКАЯ
-				</label>
-				<label class="item-checkbox__label">
-					<input type="checkbox" value="2" name="kids" data-once="1">
-					<span class="checkmark"></span>
-					ДЕТСКАЯ
-				</label>
-				<button class="all-item" type="submit" name="item_all">
-					ПОКАЗАТЬ ВСЕ ТОВАРЫ
-				</button>
+				<div class="item-checkbox__contain">
+					<label class="item-checkbox__label">
+						<input type="checkbox" value="1" name="men" data-once="1">
+						<span class="checkmark"></span>
+						МУЖСКАЯ
+					</label>
+					<label class="item-checkbox__label">
+						<input type="checkbox" value="1" name="women" data-once="1">
+						<span class="checkmark"></span>
+						ЖЕНСКАЯ
+					</label>
+					<label class="item-checkbox__label kids">
+						<input type="checkbox" value="2" name="kids" data-once="1">
+						<span class="checkmark"></span>
+						ДЕТСКАЯ
+					</label>
+				</div>
+				<div class="item-checkbox__contain">
+					<button class="all-item" type="submit" name="item_all">
+						ПОКАЗАТЬ ВСЕ ТОВАРЫ
+					</button>
+				</div>
 			</div>
 		</div>
 
@@ -78,7 +82,7 @@
 							</select>
 							<span class="arrow"></span>
 						</div>
-						<div class="color_item">
+						<div class="color-item">
 							<!-- js предлогает выбрать цвет -->
 						</div>
 						<div class="item__image"></div>
@@ -91,10 +95,10 @@
 			</div>
 			<div class="women">
 				<div class="catalog__women">
-					<p class="header__catalog__2">ЖЕНСКАЯ</p>
+					<p class="catalog-women__header">ЖЕНСКАЯ</p>
 					<div class="border__2"></div>
 				</div>
-				<div class="pagination pagination_women" data-gender="slot-women">
+				<div class="pagination pagination-women" data-gender="slot-women">
 					<span class="arrow arrow-left" data-gender="women" data-start='0' data-get='3' data-go='-3'></span>
 					<span class="text">0/0</span>
 					<span class="arrow arrow-right" data-gender="women" data-start='3' data-get='3' data-go='3'></span>
@@ -138,12 +142,14 @@
 			</div>
 		</div>
 	</footer>
+	<!-- *скрол в низ -->
 	<script type="text/javascript">
 		let down = document.querySelector('span.arrow-down');
 		down.addEventListener("click", () => document.querySelector('section.item').scrollIntoView({ behavior: "smooth" }));
 	</script>
 	<script src="js/pagination.js"></script>
 	<script src="js/travel-pagination.js"></script>
+	<!-- *пагинация -->
 	<script type="text/javascript">
 		// Первая генерация, а также показ и сокрытие блоков с карточками
 		function show_catalog(item) {
@@ -165,11 +171,20 @@
 					lab.value = 0;
 					show_catalog(label);
 					document.querySelector('div.' + lab.name).style.display = 'block';
-					if (lab.dataset.once == 1) {
+					// проверяем активен ли cheackbox kids если да, то меняем генерацию
+					let kid = document.querySelector("label.kids").querySelector("input");
+					if (lab.dataset.once == 1 && kid.value != 3) {
 						lab.dataset.once = 0;
 						let rem = document.querySelector('div.' + lab.name).querySelectorAll('div.slot_item');
 						rem.forEach(r => r.parentElement.removeChild(r));
 						ajax_conect(lab.name);
+						count_list(0, 'u');
+					}
+					if (lab.dataset.once == 1 && kid.value == 3) {
+						lab.dataset.once = 0;
+						let rem = document.querySelector('div.' + lab.name).querySelectorAll('div.slot_item');
+						rem.forEach(r => r.parentElement.removeChild(r));
+						ajax_conect(lab.name, 0, 3, 1);
 						count_list(0, 'u');
 					}
 				}
@@ -217,6 +232,7 @@
 			});
 		});
 	</script>
+	<!-- *смена картинки (цвет) -->
 	<script>
 		// смена картинки при нажатии на круги с цветом товара
 		function go() {

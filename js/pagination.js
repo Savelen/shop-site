@@ -25,7 +25,7 @@ function addSlot(slot_info, gender = "men,women") {
 				}
 			}
 			// цвет товара
-			clone_el = clone.querySelector("div.color_item");
+			clone_el = clone.querySelector("div.color-item");
 			el = document.createElement('ul');
 			el.className = "color_item__slot";
 			for (let j = 0; j < men[i].color.length && j < 3; j++) {
@@ -83,7 +83,7 @@ function addSlot(slot_info, gender = "men,women") {
 				}
 			}
 			// цвет товара
-			clone_el = clone.querySelector("div.color_item");
+			clone_el = clone.querySelector("div.color-item");
 			el = document.createElement('ul');
 			el.className = "color_item__slot";
 			for (let j = 0; j < women[i].color.length && j < 3; j++) {

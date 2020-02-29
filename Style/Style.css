@@ -6,7 +6,7 @@
 header {
   background: url(Image/bg/background.webp) no-repeat;
   background-size: cover;
-  background-position: cover;
+  background-position: center;
   height: 100vh;
 }
 /*Конец*/
@@ -156,9 +156,12 @@ div.item__menu div.item-checkbox {
 }
 /* -2- Конец */
 /* -2- Кнопка "Показать Все товары"*/
+.item-checkbox {
+  display: flex;
+  justify-content: space-between;
+}
 button.all-item {
-  position: absolute;
-  right: 7.5%;
+  position: relative;
   margin-top: -17px;
   border: 0;
   border-radius: 4px;
@@ -217,7 +220,7 @@ div.catalog__men p.catalog-men__header {
   font-size: 1.2em;
   font-weight: 500;
 }
-div.catalog__women p.header__catalog__2 {
+div.catalog__women p.catalog-women__header {
   position: absolute;
   font-size: 1.2em;
   font-weight: 500;
@@ -238,7 +241,7 @@ div.pagination {
 div.pagination-men {
   justify-content: flex-end;
 }
-div.pagination_women {
+div.pagination-women {
   justify-content: flex-start;
 }
 div.pagination span.arrow-left {
@@ -324,7 +327,7 @@ div.select span.arrow {
   right: 6px;
   top: 1px;
 }
-div.color_item {
+div.color-item {
   display: inline-block;
   position: relative;
   top: -18px;
@@ -372,6 +375,7 @@ div.slot div.name__item {
   position: relative;
   top: 31px;
   left: 18px;
+  width: 70%;
   font-size: 18px;
   font-family: "Myriad Pro" sans-serif;
   font-weight: bold;
@@ -395,16 +399,19 @@ div.slot div.cost__item span {
 
 /* О нас */
 section.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 400px;
+  min-height: 350px;
   background-color: #aa9b77;
 }
 section.about div {
-  position: absolute;
-  margin-top: 75px;
-  margin-left: 25%;
+  position: relative;
   width: 50%;
-  height: 250px;
+  min-height: 62.5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   font-size: 1.1em;
   border: solid 2px;
   border-color: #918363;
@@ -423,10 +430,11 @@ section.about h1 {
 /* Конец */
 /*-1- текст*/
 section.about p {
-  position: absolute;
-  top: 30px;
+  position: relative;
+  padding-top: 30px;
   left: 11.7%;
   width: 76.5%;
+  max-height: 100%;
   text-align: center;
   line-height: 24px;
   font-size: 16px;
