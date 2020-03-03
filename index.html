@@ -52,8 +52,8 @@
 					</label>
 				</div>
 				<div class="item-checkbox__contain">
-					<button class="all-item" type="submit" name="item_all">
-						ПОКАЗАТЬ ВСЕ ТОВАРЫ
+					<button class="all-item" type="submit" name="item_all" data-activ="0">
+						<p>ПОКАЗАТЬ ВСЕ ТОВАРЫ </p>
 					</button>
 				</div>
 			</div>
@@ -105,6 +105,13 @@
 				</div>
 				<div class="slot slot-women"></div>
 			</div>
+			<div class="show-all-item">
+				<div class="flex-contain">
+					<p class="catalog-women__header">ВСЕ ТОВАРЫ</p>
+					<div class="border__2"></div>
+				</div>
+				<div class="slot"></div>
+			</div>
 		</div>
 	</section>
 
@@ -152,70 +159,88 @@
 	<!-- *пагинация -->
 	<script type="text/javascript">
 		// Первая генерация, а также показ и сокрытие блоков с карточками
-		function show_catalog(item) {
-			let count = 0;
-			item.forEach(i => {
-				if (i.name == 'men' || i.name == 'women') count += Number(i.value);
-			});
-			if (count < 2) {
-				document.querySelector('div.catalog__item').style.display = 'inherit';
-			}
-			else if (count == 2) {
-				document.querySelector('div.catalog__item').style.display = 'none';
-			}
-		}
-		let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
-		label.forEach(lab => {
-			lab.addEventListener("click", () => {
-				if (lab.value == 1) {
-					lab.value = 0;
-					show_catalog(label);
-					document.querySelector('div.' + lab.name).style.display = 'block';
+		// <!-- *Функция для сокрытия показа блоков в зависимости от checkbox -->
+		let slot = {
+			check: [],
+			show_slot: function () {
+				let slot = document.querySelector('div.item-checkbox').querySelectorAll('input');
+				let but = document.querySelector('button.all-item');
+				let activ = {
+					'but': but.dataset.activ,
+					'checkEnable': [],
+					'checkDusable': []
+				}
+				slot.forEach(s => {
+					if (s.checked && s.name != 'kids') activ.checkEnable.push(s);
+					else if (!s.checked && s.name != 'kids') activ.checkDusable.push(s);
+				});
+				if (activ.but == 0 && activ.checkEnable.length != 0) {
+					document.querySelector('div.catalog__item').style.display = "block";
+					document.querySelector('div.show-all-item').style.display = "none";
+					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "block");
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+				}
+				else if (activ.but == 1 && activ.checkEnable.length != 0) {
+					document.querySelector('div.catalog__item').style.display = "block";
+					document.querySelector('div.show-all-item').style.display = "block";
+					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+				}
+				else if (activ.checkEnable.length == 0) {
+					document.querySelector('div.catalog__item').style.display = "none";
+					document.querySelector('div.show-all-item').style.display = "none";
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+				}
+			},
+			add_slot: function () {
+				slot.show_slot();
+				if (this.checked && this.name != "kids") {
 					// проверяем активен ли cheackbox kids если да, то меняем генерацию
 					let kid = document.querySelector("label.kids").querySelector("input");
-					if (lab.dataset.once == 1 && kid.value != 3) {
-						lab.dataset.once = 0;
-						let rem = document.querySelector('div.' + lab.name).querySelectorAll('div.slot_item');
+					if (!kid.checked) {
+						this.dataset.once = 0;
+						let rem = document.querySelector('div.' + this.name).querySelectorAll('div.slot_item');
 						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(lab.name);
+						ajax_conect(this.name);
 						count_list(0, 'u');
 					}
-					if (lab.dataset.once == 1 && kid.value == 3) {
-						lab.dataset.once = 0;
-						let rem = document.querySelector('div.' + lab.name).querySelectorAll('div.slot_item');
+					if (kid.checked) {
+						this.dataset.once = 0;
+						let rem = document.querySelector('div.' + this.name).querySelectorAll('div.slot_item');
 						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(lab.name, 0, 3, 1);
+						ajax_conect(this.name, 0, 3, 1);
 						count_list(0, 'u');
 					}
 				}
-				else if (lab.value == 0) {
-					lab.value = 1;
-					show_catalog(label);
-					document.querySelector('div.' + lab.name).style.display = 'none';
-				}
-				else if (lab.name == "kids") {
-					if (lab.value == 2) {
-						lab.value = 3;
+				else if (this.name == "kids") {
+					if (this.checked) {
 						// говорим показывать детскую одежду
 						let kid = document.querySelectorAll('div.pagination');
 						kid.forEach(k => {
-							k.dataset.kids = '1';
 							let a = k.querySelectorAll('span.arrow');
 							a[0].dataset.start = 0;
 							a[1].dataset.start = 3;
 						});
-						// удаляем взрослую одежду
-						let rem = document.querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
 						// выдаём детскую
-						ajax_conect("men,women", 0, 3, 1);
-						count_list(0, 'u', 1);
-					} else if (lab.value == 3) {
-						lab.value = 2;
+						if (slot.check[0].checked) {
+							// удаляем взрослую одежду
+							let rem = document.querySelector("div.slot-men").querySelectorAll('div.slot_item');
+							rem.forEach(r => r.parentElement.removeChild(r));
+							ajax_conect("men", 0, 3, 1);
+							count_list(0, 'men', 1);
+						}
+						if (slot.check[1].checked) {
+							// удаляем взрослую одежду
+							let rem = document.querySelector("div.slot-women").querySelectorAll('div.slot_item');
+							rem.forEach(r => r.parentElement.removeChild(r));
+							ajax_conect("women", 0, 3, 1);
+							count_list(0, 'women', 1);
+						}
+					}
+					else {
 						// готовим показывать взрослую одежду
 						let kid = document.querySelectorAll('div.pagination');
 						kid.forEach(k => {
-							k.dataset.kids = '0';
 							let a = k.querySelectorAll('span.arrow');
 							a[0].dataset.start = 0;
 							a[1].dataset.start = 3;
@@ -224,13 +249,45 @@
 						let rem = document.querySelectorAll('div.slot_item');
 						rem.forEach(r => r.parentElement.removeChild(r));
 						// генерируем взрослую
-						ajax_conect("men,women");
-						count_list(0, 'u');
-					}
+						if (slot.check[0].checked) {
+							// удаляем взрослую одежду
+							ajax_conect("men");
+							count_list(0, 'u');
+						}
+						if (slot.check[1].checked) {
+							// удаляем взрослую одежду
+							ajax_conect("women");
+							count_list(0, 'u');
+						}
 
+					}
 				}
-			});
+			},
+			all_slot: function () { }
+		}
+		let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
+		slot.check.push(label[0], label[1]);
+		label.forEach(lab => {
+			lab.addEventListener('click', slot.add_slot);
 		});
+		// <!--* Все товары--> --------------------------------------------------------------------
+		// button.addEventListener("click", () => {
+
+		// 	let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
+		// 	if (button.dataset.activ == 1) {
+		// 		document.querySelector('div.catalog__item').style.display = 'block';
+		// 		button.querySelector('p').textContent = "скрыть все товары";
+		// 		button.dataset.activ = 0;
+		// 		label.forEach(lab => {
+
+		// 		});
+		// 	}
+		// 	else if (button.dataset.activ == 0) {
+		// 		document.querySelector('div.catalog__item').style.display = 'none';
+		// 		button.querySelector('p').textContent = "показать все товары";
+		// 		button.dataset.activ = 1;
+		// 	}
+		// });
 	</script>
 	<!-- *смена картинки (цвет) -->
 	<script>
@@ -260,6 +317,7 @@
 			})
 		}
 	</script>
+
 </body>
 
 </html>

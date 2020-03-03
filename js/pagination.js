@@ -1,9 +1,9 @@
-function addSlot(slot_info, gender = "men,women") {
+function addSlot(slot_info, gender = "men,women", all) {
 	let men = [];
 	let women = [];
-
+	console.log(all);
 	// функции добавления слотов для мущин и для женжин, а также пагинации
-	function men_slot(men) {
+	function men_slot(men, up = 0) {
 		uplevel = document.querySelectorAll('div.slot');
 		let slot = document.querySelector("div.slot-item-hidden");
 		for (let i = 0; i < men.length; i++) {
@@ -58,10 +58,10 @@ function addSlot(slot_info, gender = "men,women") {
 			el.textContent = '₽';
 			clone_el.textContent = men[i].cost[0] + ',' + men[i].cost[1];
 			clone_el.appendChild(el);
-			uplevel[0].appendChild(clone);
+			uplevel[up].appendChild(clone);
 		}
 	}
-	function women_slot(women) {
+	function women_slot(women, up = 1) {
 		uplevel = document.querySelectorAll('div.slot');
 		let slot = document.querySelector("div.slot-item-hidden");
 		for (let i = 0; i < women.length; i++) {
@@ -116,7 +116,7 @@ function addSlot(slot_info, gender = "men,women") {
 			el.textContent = '₽';
 			clone_el.textContent = women[i].cost[0] + ',' + women[i].cost[1];
 			clone_el.appendChild(el);
-			uplevel[1].appendChild(clone);
+			uplevel[up].appendChild(clone);
 		}
 	}
 	// сортеруем по полу
@@ -135,7 +135,9 @@ function addSlot(slot_info, gender = "men,women") {
 				if (mess.length > 0) {
 					mess.forEach(m => { if (m.dataset.gender == 'men') m.parentElement.removeChild(m); });
 				}
-				men_slot(men);
+				if (!all) men_slot(men);
+				else men_slot(men, 2);
+
 			}
 			else if (slot_info[(slot_info.length - 1)].pagination.men == undefined) {
 				message = document.createElement('div');
@@ -152,7 +154,8 @@ function addSlot(slot_info, gender = "men,women") {
 				if (mess.length > 0) {
 					mess.forEach(m => { if (m.dataset.gender == 'women') m.parentElement.removeChild(m); });
 				}
-				women_slot(women);
+				if (!all) women_slot(women);
+				else women_slot(women, 2);
 			}
 			else if (slot_info[(slot_info.length - 1)].pagination.women == undefined) {
 				message = document.createElement('div');
@@ -167,13 +170,14 @@ function addSlot(slot_info, gender = "men,women") {
 	// запуск скрипта смены изображения
 	go();
 }
-function ajax_conect(gender = "men,women", start = 0, get = 3, kids = 0) {
+function ajax_conect(gender = "men,women", start = 0, get = 3, kids = 0, all = false) {
 	let slot = new XMLHttpRequest();
 	slot.open('GET', '../Component/prepare_item.php?gender=' + gender + '&start=' + start + '&get=' + get + '&kids=' + kids, true);
 	json = slot.addEventListener('readystatechange', function () {
 		if (slot.readyState == 4 && slot.status == 200) {
 			let respons = JSON.parse(slot.responseText);
-			addSlot(respons, gender);
+			console.log(respons);
+			addSlot(respons, gender, all);
 		}
 	})
 	slot.send();

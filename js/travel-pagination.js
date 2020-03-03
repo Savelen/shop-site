@@ -1,4 +1,6 @@
-function count_list(now, gender, kids = 0) {
+function count_list(now, gender, kids = 0, get = 3) {
+	let check = document.querySelectorAll('.pagination');
+	check.forEach(c => c.style.display = 'flex');
 	// запрашиваем общее количество товара
 	let count_page = new XMLHttpRequest();
 	count_page.open('GET', '../Component/prepare_item.php?gender=""&start=0&get=0&kids=' + kids + '&pag=true', true);
@@ -9,21 +11,21 @@ function count_list(now, gender, kids = 0) {
 			if (respons[0].pagination.length != 0) {
 				for (count in respons[0].pagination) {
 					// вычисляем колличество занимаемых страниц
-					let page = Math.ceil(respons[0].pagination[count] / 3);
+					let page = Math.ceil(respons[0].pagination[count] / get);
 					// вставляем итог с проверкой конечности
 					if (count == "men" && gender == 'men' || gender == "u") {
 						let p = document.querySelector('div.pagination-men');
 						let text = p.querySelector('span.text');
-						if ((now / 3 + 1) >= page) text.dataset.go = false;
+						if ((now / get + 1) >= page) text.dataset.go = false;
 						else text.dataset.go = true;
-						text.textContent = (now / 3 + 1) + "/" + page;
+						text.textContent = (now / get + 1) + "/" + page;
 					}
 					if (count == "women" && gender == "women" || gender == "u") {
 						let p = document.querySelector('div.pagination-women');
 						let text = p.querySelector('span.text');
-						if ((now / 3 + 1) >= page) text.dataset.go = false;
+						if ((now / get + 1) >= page) text.dataset.go = false;
 						else text.dataset.go = true;
-						text.textContent = (now / 3 + 1) + "/" + page;
+						text.textContent = (now / get + 1) + "/" + page;
 
 					}
 				}

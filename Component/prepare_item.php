@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "../Model/item-db.php";
 
 function get_color($str){
@@ -7,7 +7,7 @@ function get_color($str){
 	foreach ($arr_color as $col) {
 		$arr = color($col);
 		if ($arr != NULL) {
-			array_push($answer,$arr);	
+			array_push($answer,$arr);
 		}
 	}
 	return $answer;
@@ -36,9 +36,8 @@ function prepare_slot($gender, $start, $get, $kids = 0, $pag = false){
 		}
 	}
 	if ($pag){
-		array_push($result,['pagination'=>get_pagination((int)$kids)]);
+		array_push($result,['pagination'=>get_pagination($kids)]);
 	}
-	return $result;	
+	return $result;
 }
 echo json_encode(prepare_slot(explode(",",$_GET['gender']),$_GET['start'],$_GET['get'],$_GET['kids'],$_GET['pag']));
-?>

@@ -42,7 +42,6 @@ a:hover {
 a:active {
   color: #000;
 }
-
 header img.card {
   position: absolute;
   top: 30px;
@@ -170,6 +169,10 @@ button.all-item {
   color: #fff;
   background-color: #aa9b77;
   cursor: pointer;
+  text-transform: uppercase;
+}
+button.all-item:focus {
+  outline: none;
 }
 /* -2- Конец */
 /* -1- Конец */
@@ -226,6 +229,32 @@ div.catalog__women p.catalog-women__header {
   font-weight: 500;
   right: 0;
 }
+div.show-all-item {
+  display: none;
+}
+div.flex-contain {
+  display: inline-flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  position: relative;
+  /* height: 27px; */
+  width: 100%;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+p.catalog-women__header {
+  white-space: nowrap;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+div.flex-contain div.border__2 {
+  width: 100%;
+  height: 2px;
+  align-self: center;
+  margin-left: 9px;
+  border-top: solid 2px;
+  border-color: #cccccc;
+}
 /*-1- Конец*/
 
 /*-1- пагинация*/
@@ -267,6 +296,7 @@ div.pagination span.arrow-right {
 
 div.slot {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 45px;
   min-height: 397px;
