@@ -49,7 +49,7 @@ function ui_pagination(arrow, go) {
 		// вызов до
 		if (arrow.parentElement.querySelector('span.text').dataset.go == "true") {
 			remove_slot(arrow);
-			if (arrow.parentElement.dataset.kids != '1') {
+			if (!document.querySelector('label.kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
 				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}
@@ -75,7 +75,7 @@ function ui_pagination(arrow, go) {
 			//вызов после
 
 			remove_slot(arrow);
-			if (arrow.parentElement.dataset.kids != '1') {
+			if (!document.querySelector('label.kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
 				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}

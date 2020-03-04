@@ -1,7 +1,6 @@
 function addSlot(slot_info, gender = "men,women", all) {
 	let men = [];
 	let women = [];
-	console.log(all);
 	// функции добавления слотов для мущин и для женжин, а также пагинации
 	function men_slot(men, up = 0) {
 		uplevel = document.querySelectorAll('div.slot');
@@ -176,7 +175,6 @@ function ajax_conect(gender = "men,women", start = 0, get = 3, kids = 0, all = f
 	json = slot.addEventListener('readystatechange', function () {
 		if (slot.readyState == 4 && slot.status == 200) {
 			let respons = JSON.parse(slot.responseText);
-			console.log(respons);
 			addSlot(respons, gender, all);
 		}
 	})
