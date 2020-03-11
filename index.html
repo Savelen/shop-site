@@ -1,378 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
-	<title>Shop</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="Style/Style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shop test site</title>
+	<link rel="stylesheet" href="Style/style.css">
 </head>
 
 <body>
 	<header>
+		<!-- Фон -->
+		<picture class="background">
+			<source srcset="/Style/Image/bg/background5909-3546.webp" type="Image/webp" media="(min-width: 1920px)">
+			<source srcset="/Style/Image/bg/background1920-1080.webp" type="Image/webp" media="(min-width: 1280px)">
+			<source srcset="/Style/Image/bg/background1280-720.webp" type="Image/webp" media="(max-width: 1280px)">
+			<img class="background__img" src="/Style/Image/item/img1.png" alt="">
+		</picture>
 		<!-- Логотип и Меню -->
-		<div class="menu">
-			<a href="#"><img class="card" src="Style/Image/icon/shopping-cart.png" alt=""></a>
-			<div class="menu-sub">
-				<a href="#">Главная</a>
-				<a href="#">Товары</a>
+		<div class="menu menu_follow_false">
+			<img src="/Style/Image/icon/Livello.png" alt="" class="menu__logo logo logo_follow_false">
+			<div class="menu__but-menu but-menu but-menu_follow_false">
+				<span class="but-menu__header">Главная</span>
+				<span class="but-menu__item">Товары</span>
+				<img src="Style/Image/icon/shopping-cart.png" alt="" class="but-menu__card">
 			</div>
-		</div>
 
+		</div>
 		<!-- Приветственный Текст -->
 		<div class="message">
 			<h1>Наша одежда, ваш комфорт</h1>
 			<p>
-				Текст Рыба: Явные признаки победы институционализации
-				подвергнуты целой серии независимых исследований.Высокое качество позиционных исследований
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam minima placeat vel ex provident omnis
+				necessitatibus dolorum eligendi est aperiam cumque veniam, sunt facere blanditiis maxime deserunt ipsum
 			</p>
 		</div>
-		<div class="arrow"><span class="arrow-down"></span></div>
+		<!-- Стрелка в низ -->
+		<div class="arrow">
+			<sapn class="arrow__bg"></sapn><span class="arrow__down"></span>
+		</div>
 	</header>
-	<!-- Католог товаров -->
+
 	<section class="item">
-		<!-- Форма выбота типа продукта -->
-		<div class="backgraung-item"></div>
-		<div class="item__menu">
-			<div class="item-checkbox">
-				<div class="item-checkbox__contain">
-					<label class="item-checkbox__label">
-						<input type="checkbox" value="1" name="men" data-once="1">
-						<span class="checkmark"></span>
-						МУЖСКАЯ
+		<!-- *фильтр товара -->
+		<div class="menu-filtr">
+			<div class="menu-filtr__item-filter item-filter">
+				<div class="item-filter__checkbox-item checkbox-item">
+					<label class="checkbox-item__label">
+						<input type="checkbox" name="men" class="checkbox-item__checkbox">
+						<span class="checkbox-item__checkmark"></span>
+						<h3 class="checkbox-item__people">мужская</h3>
 					</label>
-					<label class="item-checkbox__label">
-						<input type="checkbox" value="1" name="women" data-once="1">
-						<span class="checkmark"></span>
-						ЖЕНСКАЯ
+					<label class="checkbox-item__label">
+						<input type="checkbox" name="women" class="checkbox-item__checkbox">
+						<span class="checkbox-item__checkmark"></span>
+						<h3 class="checkbox-item__people">женская</h3>
 					</label>
-					<label class="item-checkbox__label kids">
-						<input type="checkbox" value="2" name="kids" data-once="1">
-						<span class="checkmark"></span>
-						ДЕТСКАЯ
+					<label class="checkbox-item__label">
+						<input type="checkbox" name="kids" class="checkbox-item__checkbox">
+						<span class="checkbox-item__checkmark"></span>
+						<h3 class="checkbox-item__people">детская</h3>
 					</label>
 				</div>
-				<div class="item-checkbox__contain">
-					<button class="all-item" type="submit" name="item_all" data-activ="0">
-						<p>ПОКАЗАТЬ ВСЕ ТОВАРЫ </p>
-					</button>
+				<div class="item-filter__button-item button-item">
+					<button class="button-item__all-item" data-activ="0">показать все товары</button>
 				</div>
 			</div>
 		</div>
+		<!-- *Каталог  -->
+		<div class="catalog-item">
+			<!-- *Мужской отдел -->
+			<div class="catalog-item__men men">
+				<div class="men__header">
+					<h2 class="name">мужская</h2>
+					<div class="men__dorder"></div>
+				</div>
+				<div class="men__pagination pagination">
+					<span class="pagination__arrow pagination__arrow_left" data-gender="men" data-start='0' data-get="3"
+						data-go='-3'></span>
+					<span class="pagination__text">0/0</span>
+					<span class="pagination__arrow pagination__arrow_right" data-gender="men" data-start='3' data-get="3"
+						data-go='-3'></span>
 
-		<!-- Каталог -->
-		<div class="catalog__item">
-			<div class="men">
-				<div class="catalog__men">
-					<p class="catalog-men__header">МУЖСКАЯ</p>
-					<div class="border__1"></div>
 				</div>
-				<!-- PHP код генерирует контент -->
-				<!-- HTML/CSS и JS Слот товара-->
-				<div class="pagination pagination-men" data-gender="slot-men">
-					<span class="arrow arrow-left" data-gender="men" data-start='0' data-get='3' data-go='-3'></span>
-					<span class="text">0/0</span>
-					<span class="arrow arrow-right" data-gender="men" data-start='3' data-get='3' data-go='3'></span>
-				</div>
-				<div class="slot slot-men">
+				<div class="men__slot slot">
 					<!-- Слот товара -->
-					<div class="slot-item-hidden">
-						<div class="select">
-							<select class="size__item" name="kyky">
-								<option disabled selected> РАЗМЕР</option>
+					<div class="men__slot-item slot-item slot-item_hidden">
+						<!-- выбор размера -->
+						<div class="slot-item__select-size select-size">
+							<select class="select-size__size-item">
+								<option disabled selected>размер</option>
 							</select>
-							<span class="arrow"></span>
+							<!-- ! попробовать через ::before -->
+							<!-- <span class="arrow"></span> -->
 						</div>
-						<div class="color-item">
-							<!-- js предлогает выбрать цвет -->
+						<!-- выбор цвета -->
+						<div class="men__color-item color-item">
 						</div>
-						<div class="item__image"></div>
-						<div class="name__item"></div>
-						<div class="cost__item"></div>
+						<div class="men__item__image"></div>
+						<div class="men__name__item"></div>
+						<div class="men__cost__item"></div>
 					</div>
-
-					<!-- Конец слот товара -->
 				</div>
 			</div>
-			<div class="women">
-				<div class="catalog__women">
-					<p class="catalog-women__header">ЖЕНСКАЯ</p>
-					<div class="border__2"></div>
+			<!-- *Женский отдел -->
+			<div class="catalog-item__women women">
+				<div class="women__header">
+					<h2 class="name">женская</h2>
+					<div class="women__dorder"></div>
 				</div>
-				<div class="pagination pagination-women" data-gender="slot-women">
-					<span class="arrow arrow-left" data-gender="women" data-start='0' data-get='3' data-go='-3'></span>
-					<span class="text">0/0</span>
-					<span class="arrow arrow-right" data-gender="women" data-start='3' data-get='3' data-go='3'></span>
+				<div class="women__pagination pagination">
+					<span class="pagination__arrow pagination__arrow_left" data-gender="women" data-start='0' data-get="3"
+						data-go='-3'></span>
+					<span class="pagination__text">0/0</span>
+					<span class="pagination__arrow pagination__arrow_right" data-gender="women" data-start='3' data-get="3"
+						data-go='3'></span>
 				</div>
-				<div class="slot slot-women"></div>
+				<div class="women__slot slot"></div>
 			</div>
-			<div class="show-all-item">
-				<div class="flex-contain">
-					<p class="catalog-women__header">ВСЕ ТОВАРЫ</p>
-					<div class="border__2"></div>
+			<!-- *Показ всех предметов -->
+			<div class="catalog-item__all-item all-item">
+				<div class="all-item__header">
+					<h2 class="name">все товары</h2>
+					<div class="all-item__dorder"></div>
 				</div>
-				<div class="slot"></div>
+				<div class="all-item__slot slot"></div>
 			</div>
 		</div>
 	</section>
 
-	<!-- О нас -->
 	<section class="about">
-		<!-- о нас кратко -->
-		<div>
-			<h1>О НАС</h1>
-			<p>
-				Текст Рыба: Внезапно, интерактивные прототипы, превозмогая сложившуюся непростую экономическую ситуацию,
-				объединены в целые кластеры себе подобных. Вот вам яркий пример современных тенденций - перспективное
-				планирование способствует подготовке и реализации системы массового участия. Прежде всего, сложившаяся
-				структура организации обеспечивает актуальность как самодостаточных, так и внешне зависимых концептуальных
-				решений.
-			</p>
+		<div class="about-message">
+			<h2>о нас</h2>
+			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non aut illo aliquam commodi obcaecati ex rerum,
+				illum blanditiis dolor maiores atque est nobis asperiores vitae quos suscipit doloremque impedit ducimus,
+				veniam beatae eius eligendi, cupiditate voluptatum aperiam. Pariatur, repudiandae incidunt. Reprehenderit
+				quibusdam, delectus nostrum sapiente optio dolorem laudantium nulla iusto! Quae voluptates praesentium quis
+				assumenda soluta! Aspernatur nostrum suscipit tenetur.</p>
 		</div>
 	</section>
-
-	<!-- Футер -->
 	<footer>
-		<!-- социальные сети -->
-		<div class="soc_web">
-			<a href="#"><img src="Style/Image/soc/Twitter.png" alt="" class="twitter"></a>
-			<a href="#"><img src="Style/Image/soc/facebook.png" alt="" class="facebook"></a>
-			<a href="#"><img src="Style/Image/soc/vk.png" alt="" class="VK"></a>
+		<div class="soc-web">
+			<a class="soc-web__link" href="#">
+				<img class="soc-web__ico" src="Style/Image/soc/Twitter.png" alt="">
+			</a>
+			<a class="soc-web__link" href="#">
+				<img class="soc-web__ico" src="Style/Image/soc/facebook.png" alt="">
+			</a>
+			<a class="soc-web__link" href="#">
+				<img class="soc-web__ico" src="Style/Image/soc/vk.png" alt="">
+			</a>
 		</div>
-
-		<!-- Список ссылок -->
-		<div class="footer_menu">
-			<div>
-				<a href="#" class="futer__menu"> ПОМОЩЬ </a><span>|</span>
-				<a href="#" class="futer__menu"> ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ </a><span>|</span>
-				<a href="#" class="futer__menu"> О НАС </a><span>|</span>
-				<a href="#" class="futer__menu"> КОНТАКТЫ</a>
+		<div class="footer-menu">
+			<div class="but">
+				<a href="#" class="footer-menu__link">помощь</a>
+				<span class="delimiter">|</span>
+				<a href="#" class="footer-menu__link">политика конфиденциальности</a>
+				<span class="delimiter">|</span>
+				<a href="#" class="footer-menu__link">о нас</a>
+				<span class="delimiter">|</span>
+				<a href="#" class="footer-menu__link">контакты</a>
 			</div>
 		</div>
 	</footer>
-	<!-- *скрол в низ -->
-	<script type="text/javascript">
-		let down = document.querySelector('span.arrow-down');
-		down.addEventListener("click", () => document.querySelector('section.item').scrollIntoView({ behavior: "smooth" }));
-	</script>
-	<script src="js/pagination.js"></script>
-	<script src="js/travel-pagination.js"></script>
-	<!-- *пагинация -->
-	<script type="text/javascript">
-		// Первая генерация, а также показ и сокрытие блоков с карточками
-		// <!-- *Функция для сокрытия показа блоков в зависимости от checkbox -->
-		let slot = {
-			check: [],
-			add_events: function (fun) {
-				slot.check.forEach(inp => {
-					inp.addEventListener('click', fun);
-				});
-			},
-			remove_events: function (fun) {
-				slot.check.forEach(inp => {
-					inp.removeEventListener('click', fun);
-				});
-			},
-			show_slot: function () {
-				let slot = document.querySelector('div.item-checkbox').querySelectorAll('input');
-				let but = document.querySelector('button.all-item');
-				let activ = {
-					'but': but.dataset.activ,
-					'checkEnable': [],
-					'checkDusable': []
-				}
-				slot.forEach(s => {
-					if (s.checked && s.name != 'kids') activ.checkEnable.push(s);
-					else if (!s.checked && s.name != 'kids') activ.checkDusable.push(s);
-				});
-				if (activ.but == 0 && activ.checkEnable.length != 0) {
-					document.querySelector('div.catalog__item').style.display = "block";
-					document.querySelector('div.show-all-item').style.display = "none";
-					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "block");
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-				else if (activ.but == 1 && activ.checkEnable.length != 0) {
-					document.querySelector('div.catalog__item').style.display = "block";
-					document.querySelector('div.show-all-item').style.display = "block";
-					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-				else if (activ.checkEnable.length == 0) {
-					document.querySelector('div.catalog__item').style.display = "none";
-					document.querySelector('div.show-all-item').style.display = "none";
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-			},
-			add_slot: function () {
-				slot.show_slot();
-				if (this.checked && this.name != "kids") {
-					// проверяем активен ли cheackbox kids если да, то меняем генерацию
-					let kid = document.querySelector("label.kids").querySelector("input");
-					if (!kid.checked) {
-						let rem = document.querySelector('div.' + this.name).querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(this.name);
-						count_list(0, 'u');
-					}
-					if (kid.checked) {
-						let rem = document.querySelector('div.' + this.name).querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(this.name, 0, 3, 1);
-						count_list(0, 'u', 1);
-					}
-				}
-				else if (this.name == "kids") {
-					if (this.checked) {
-						// говорим показывать детскую одежду
-						let kid = document.querySelectorAll('div.pagination');
-						kid.forEach(k => {
-							let a = k.querySelectorAll('span.arrow');
-							a[0].dataset.start = 0;
-							a[1].dataset.start = 3;
-						});
-						// выдаём детскую
-						if (slot.check[0].checked) {
-							// удаляем взрослую одежду
-							let rem = document.querySelector("div.slot-men").querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect("men", 0, 3, 1);
-							count_list(0, 'men', 1);
-						}
-						if (slot.check[1].checked) {
-							// удаляем взрослую одежду
-							let rem = document.querySelector("div.slot-women").querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect("women", 0, 3, 1);
-							count_list(0, 'women', 1);
-						}
-					}
-					else {
-						// готовим показывать взрослую одежду
-						let kid = document.querySelectorAll('div.pagination');
-						kid.forEach(k => {
-							let a = k.querySelectorAll('span.arrow');
-							a[0].dataset.start = 0;
-							a[1].dataset.start = 3;
-						});
-						// удаляем детскую одежду
-						let rem = document.querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
-						// генерируем взрослую
-						if (slot.check[0].checked) {
-							// удаляем детскую одежду
-							ajax_conect("men");
-							count_list(0, 'u');
-						}
-						if (slot.check[1].checked) {
-							// удаляем детскую одежду
-							ajax_conect("women");
-							count_list(0, 'u');
-						}
+	<script>
+		let menu = document.querySelector('.menu_follow_false');
+		let logo = document.querySelector('.logo_follow_false');
+		let menu_but = document.querySelector('.but-menu_follow_false');
+		window.addEventListener("scroll", () => {
+			if (window.pageYOffset != 0) {
+				menu.className = "menu menu_follow_true";
+				logo.className = "menu__logo logo logo_follow_true";
+				menu_but.className = "menu__but-menu but-menu but-menu_follow_true";
 
-					}
-				}
-			},
-			all_slot: function () {
-				slot.show_slot();
-				slot.check.forEach(inp => {
-					if (this != inp && inp.name != 'kids' && this.name != 'kids') {
-						inp.checked = false;
-					}
-				});
-				if (this.checked && this.name != "kids") {
-					// проверяем активен ли cheackbox kids если да, то меняем генерацию
-					let kid = document.querySelector("label.kids").querySelector("input");
-					if (!kid.checked) {
-						let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(this.name, 0, 100, 0, true);
-					}
-					if (kid.checked) {
-						let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-						rem.forEach(r => r.parentElement.removeChild(r));
-						ajax_conect(this.name, 0, 100, 1, true);
-					}
-				}
-				else if (this.name == "kids") {
-					if (this.checked) {
-						// выдаём детскую
-						if (slot.check[0].checked) {
-							// удаляем взрослую одежду
-							let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect('men', 0, 100, 1, true);
-						}
-						if (slot.check[1].checked) {
-							// удаляем взрослую одежду
-							let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect("women", 0, 100, 1, true);
-						}
-					}
-					else {
-						// генерируем взрослую
-						if (slot.check[0].checked) {
-							// удаляем детскую одежду
-							let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect('men', 0, 100, 0, true);
-						}
-						if (slot.check[1].checked) {
-							// удаляем детскую одежду
-							let rem = document.querySelector('div.show-all-item').querySelectorAll('div.slot_item');
-							rem.forEach(r => r.parentElement.removeChild(r));
-							ajax_conect("women", 0, 100, 0, true);
-						}
-					}
-				}
-
-			},
-			checked_box: function (all) {
-				if (!all) {
-					slot.check.forEach(inp => {
-						if (inp.checked && inp.name != "kids") {
-							slot.add_slot.call(inp);
-						}
-					});
-				}
-				else {
-					slot.check.forEach(inp => {
-						if (inp.checked && inp.name != "kids") {
-							slot.all_slot.call(inp);
-						}
-					});
-				}
 			}
-		}
-		// <!-- *Запомнаем checkbox -->
-		let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
-		slot.check.push(label[0], label[1], label[2]);
-		slot.add_events(slot.add_slot);
-		// <!--* Все товары--> --------------------------------------------------------------------
-		let button = document.querySelector('button.all-item');
-		button.addEventListener("click", () => {
-			let label = document.querySelector('div.item-checkbox').querySelectorAll('input');
-			if (button.dataset.activ == 0) {
-				button.querySelector('p').textContent = "скрыть все товары";
-				slot.remove_events(slot.add_slot);
-				slot.add_events(slot.all_slot);
-				button.dataset.activ = 1;
-				slot.checked_box(true);
-				slot.show_slot();
-			}
-			else if (button.dataset.activ == 1) {
-				button.querySelector('p').textContent = "показать все товары";
-				slot.remove_events(slot.all_slot);
-				slot.add_events(slot.add_slot);
-				button.dataset.activ = 0;
-				slot.checked_box(false);
-				slot.show_slot();
+			else {
+				menu.className = "menu menu_follow_false";
+				logo.className = "menu__logo logo logo_follow_false";
+				menu_but.className = "menu__but-menu but-menu but-menu_follow_false";
 			}
 		});
+		let down = document.querySelector('.arrow');
+		down.addEventListener("click", () => document.querySelector('.arrow').scrollIntoView({ behavior: "smooth" }));
+		// скрол по кнопке
+		down = document.querySelector('.but-menu__item');
+		down.addEventListener("click", () => document.querySelector('.arrow').scrollIntoView({ behavior: "smooth" }));
+		down = document.querySelector('.but-menu__header');
+		down.addEventListener("click", () => document.querySelector('header').scrollIntoView({ behavior: "smooth" }));
+		// ----------------------------------------------------
+		let button = document.querySelector('.button-item__all-item');
+			button.addEventListener("click", () => {
+				let label = document.querySelector('.checkbox-item').querySelectorAll('input');
+				if (button.dataset.activ == 0) {
+					button.textContent = "скрыть все товары";
+					button.dataset.activ = 1;
+				}
+				else if (button.dataset.activ == 1) {
+					button.textContent = "показать все товары";
+					button.dataset.activ = 0;
+				}
+			});
 	</script>
-	<!-- *смена картинки (цвет) -->
+	<!-- <script src="js/pagination.js"></script>
 	<script>
-		// смена картинки при нажатии на круги с цветом товара
-		function go() {
+		ajax_conect("men,women", 0, 33, 0);
+		// ajax_conect("men,women", 0, 33, 1, true);
+
+		function go() {`
 			let img_arr = document.querySelectorAll('li');
 			img_arr.forEach(link => {
 				link.addEventListener("click", () => {
@@ -396,8 +230,8 @@
 				});
 			})
 		}
-	</script>
-
+		gp();
+	</script> -->
 </body>
 
 </html>
