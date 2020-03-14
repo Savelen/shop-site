@@ -9,6 +9,12 @@ $MC: #534c3a;
 $MSC: #695a37a4;
 // цвет меню-фильтр
 $MFC: #f5f6f7;
+// цвет цены
+$CC: #424242;
+// цвет about границ и загдлавия
+$AC: #918363;
+// цвет about текст
+$AT: #424242;
 
 @mixin trapezoid($h, $l, $r) {
   border-top: $h solid $MC;
@@ -21,7 +27,6 @@ body {
   font-size: 18px;
   font-family: myriad pro, sans-serif;
 }
-//
 header {
   position: relative;
   background-size: cover;
@@ -85,7 +90,6 @@ header {
       display: none;
     }
   }
-
   .but-menu {
     display: inline-flex;
     min-width: 25%;
@@ -138,7 +142,8 @@ header {
     p {
       margin-top: 2.5%;
       padding-left: 15%;
-      padding-right: 15%;
+			padding-right: 15%;
+			line-height: 1.333em;
     }
   }
   .arrow {
@@ -155,7 +160,6 @@ header {
       height: 55px;
       background-color: rgba(110, 108, 108, 0.417);
     }
-
     &__down {
       position: relative;
       width: 40px;
@@ -169,6 +173,7 @@ header {
 // -----------------------------------------------/
 // Оснавная секция ----------------------------------------\
 section.item {
+  width: 100%;
   // фильтр -----------------------------------------\
   .menu-filtr {
     background-color: $MFC;
@@ -243,165 +248,288 @@ section.item {
   //----------------------------------------------------/
   // Каталог -----------------------------------------\
   .catalog-item {
-    &__men {
-    }
-    &__women {
-    }
-    &__all-item {
-    }
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    margin-top: 85px;
+    margin-bottom: 85px;
   }
-
   .men {
-    // .men__header
-
     &__header {
+      width: 100%;
+      display: inline-flex;
+      margin-bottom: 40px;
     }
-
-    // .men__dorder
-
-    &__dorder {
-    }
-
-    // .men__pagination
-
-    &__pagination {
-    }
-
-    // .men__slot
-
-    &__slot {
-    }
-
-    // .men__slot-item
-
-    &__slot-item {
-    }
-
-    // .men__color-item
-
-    &__color-item {
-    }
-
-    // .men__item
-
-    &__item {
-    }
-
-    // .men__name
 
     &__name {
+      margin-right: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+      height: min-content;
+      align-content: center;
     }
 
-    // .men__cost
-
-    &__cost {
+    &__border {
+      width: 100%;
+      border: 1px solid #ccc;
+      height: 2px;
+      margin-left: 4px;
+      align-self: center;
+      margin-bottom: 2px;
     }
-  }
-  .name {
-  }
-  .pagination {
-    // .pagination__arrow
-
-    &__arrow {
-      // .pagination__arrow_left
-
-      &_left {
-      }
-
-      // .pagination__arrow_right
-
-      &_right {
-      }
-    }
-
-    // .pagination__text
-
-    &__text {
-    }
-  }
-  .slot {
-  }
-  .slot-item {
-    // .slot-item_hidden
-
-    &_hidden {
-    }
-
-    // .slot-item__select-size
-
-    &__select-size {
-    }
-  }
-  .select-size {
-    // .select-size__size-item
-
-    &__size-item {
-    }
-  }
-  .color-item {
-  }
-  .women {
-    // .women__header
-
-    &__header {
-    }
-
-    // .women__dorder
-
-    &__dorder {
-    }
-
-    // .women__pagination
 
     &__pagination {
+      justify-content: flex-end;
+    }
+  }
+  .women {
+    &__header {
+      width: 100%;
+      display: inline-flex;
+      margin-bottom: 40px;
     }
 
-    // .women__slot
+    &__name {
+      margin-left: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+      height: min-content;
+      align-content: center;
+    }
+
+    &__border {
+      width: 100%;
+      border: 1px solid #ccc;
+      height: 2px;
+      margin-right: 4px;
+      align-self: center;
+      margin-bottom: 2px;
+    }
+
+    &__pagination {
+      justify-content: flex-start;
+    }
 
     &__slot {
+      margin-bottom: 45px;
     }
   }
   .all-item {
-    // .all-item__header
-
     &__header {
+      width: 100%;
+      display: inline-flex;
     }
 
-    // .all-item__dorder
-
-    &__dorder {
+    &__name {
+      margin-right: 4px;
+      text-transform: uppercase;
+      font-weight: bold;
+      height: min-content;
+      align-content: center;
+      white-space: nowrap;
     }
 
-    // .all-item__slot
+    &__border {
+      width: 100%;
+      border: 1px solid #ccc;
+      height: 2px;
+      margin-left: 4px;
+      align-self: center;
+      margin-bottom: 2px;
+    }
+  }
+  .pagination {
+    display: inline-flex;
+    height: min-content;
+    width: 100%;
+    height: 40px;
 
-    &__slot {
+    &__arrow {
+      height: 15px;
+      width: 15px;
+      border: solid $GC;
+      border-width: 0 0 3px 3px;
+
+      &_left {
+        transform: rotate(45deg);
+      }
+
+      &_right {
+        transform: rotate(-135deg);
+      }
+    }
+
+    &__text {
+      color: $GC;
+      font-family: "QuicksandBold";
+      font-weight: bold;
+      margin-top: -1px;
+    }
+  }
+  .slot {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 45px;
+  }
+  .slot-item {
+    width: 310px;
+    height: 370px;
+    margin-bottom: 25px;
+    &_hidden {
+      display: none;
+    }
+    &_show {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    &__header-part-slot {
+      width: 100%;
+      display: inline-flex;
+      justify-content: space-around;
+      margin-top: 25px;
+    }
+    &__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 215px;
+      padding: 0 25px;
+      img {
+        max-height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__footer-part-slot {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      max-height: 50px;
+    }
+    &__name {
+      padding-top: 3px;
+      margin-left: 10px;
+      text-transform: uppercase;
+      color: $GC;
+      font-weight: bold;
+    }
+    &__cost {
+      margin-right: 10px;
+      margin-bottom: 20px;
+      // padding-bottom: 20px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.1em;
+      color: $CC;
+      span {
+        font-size: 22px;
+        font-weight: normal;
+      }
+    }
+  }
+  .slot-item:hover {
+    box-shadow: inset 0 0 0 6px $GC;
+  }
+  .select-size {
+    width: 50%;
+    display: inline-flex;
+    &__size-item {
+      appearance: none;
+      font-size: 0.888em;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 85px;
+    }
+    &__arrow-bg {
+      display: flex;
+      justify-content: flex-end;
+      height: 1em;
+      width: 20px;
+      background-color: #fff;
+      margin-left: -20px;
+      pointer-events: none;
+      margin-top: 2px;
+    }
+    &__arrow-bg::after {
+      content: "";
+      height: 0.5em;
+      width: 0.5em;
+      border: solid black;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-right: 5px;
+      margin-top: 2px;
+    }
+  }
+  .color-item {
+    display: flex;
+    justify-content: flex-start;
+    &__list {
+      display: flex;
+      li {
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+      }
+      li:not(:first-child) {
+        margin-left: 5px;
+      }
     }
   }
 }
 // ----------------------------------------------/
+// About скция--------------------------------------------\
+section.about {
+  width: 100%;
+  background-color: $GC;
+  min-height: 350px;
+  display: flex;
+  .about-message {
+    margin: 75px auto;
+    width: 50%;
+    height: min-content;
+    border: 2px solid $AC;
+    &__header {
+			font-size: 1.333em;
+			text-transform: uppercase;
+      width: 20%;
+      white-space: nowrap;
+			text-align: center;
+			font-family: serif;
+			font-weight: bolder;
+			margin: -13px auto;
+      color: $AC;
+      background-color: $GC;
+    }
+
+    &__text {
+      width: 75%;
+      text-align: center;
+			margin: 5% auto;
+			color: $AT;
+			line-height: 1.333em
+    }
+  }
+}
+
+// ----------------------------------------------/
 // -----------------------------------------------/
 // Медиазапросы -----------------------------------------\
 // Ширина -----------------------------------------------\
-@media (max-device-width: 320px) {
-  header {
-    font-size: 0.9em;
-    .menu {
-      &_follow_true {
-        @include trapezoid(50px, 0, 0);
-      }
+@media (max-device-width: 1024px) {
+section.about {
+  .about-message {
+		width: 65%;
+    &__header {
     }
-    .message {
-      width: 95%;
-      h1 {
-        font-size: 1.7em;
-      }
-      p {
-        margin-top: 2.5%;
-        padding-left: 5%;
-        padding-right: 5%;
-      }
+    &__text {
+			line-height: 1.175em
     }
   }
+}
 }
 @media (max-device-width: 768px) {
   header {
@@ -420,6 +548,113 @@ section.item {
         margin-top: 2.5%;
         padding-left: 7.5%;
         padding-right: 7.5%;
+      }
+    }
+  }
+  section.item {
+    .item-filter {
+      flex-direction: column;
+      justify-content: center;
+      &__checkbox-item {
+        margin-bottom: 10px;
+      }
+      &__button-item {
+        margin-top: 10px;
+      }
+    }
+    .checkbox-item {
+      &__people {
+        font-size: 1em;
+      }
+    }
+    .button-item {
+      &__all-item {
+        width: 190px;
+        height: 44px;
+      }
+    }
+	}
+	section.about {
+  .about-message {
+		width: 85%;
+    &__header {
+			width: 30%;
+    }
+  }
+}
+}
+@media (max-device-width: 729px) {
+  section.item {
+    .slot {
+      justify-content: center;
+    }
+  }
+}
+@media (max-device-width: 425px) {
+  section.item {
+    .item-filter {
+      &__checkbox-item {
+        margin-bottom: 5px;
+      }
+      &__button-item {
+        margin-top: 5px;
+      }
+    }
+    .checkbox-item {
+      &__people {
+        font-size: 0.8em;
+      }
+      &__checkmark {
+        top: -3px;
+        width: 21px;
+        height: 21px;
+      }
+      &__checkmark::after {
+        width: 8px;
+        height: 12px;
+        left: 5px;
+        top: 1px;
+      }
+    }
+    .button-item {
+      &__all-item {
+        width: 150px;
+        height: 34px;
+        font-size: 0.65em;
+      }
+    }
+	}
+	section.about {
+  .about-message {
+		width: 95%;
+    &__header {
+    }
+    &__text {
+			font-size: 0.9em;
+			line-height: 1.14em;
+			width: 90%;
+			margin-top: 7.5%;
+    }
+  }
+}
+}
+@media (max-device-width: 320px) {
+  header {
+    font-size: 0.9em;
+    .menu {
+      &_follow_true {
+        @include trapezoid(50px, 0, 0);
+      }
+    }
+    .message {
+      width: 95%;
+      h1 {
+        font-size: 1.7em;
+      }
+      p {
+        margin-top: 2.5%;
+        padding-left: 5%;
+        padding-right: 5%;
       }
     }
   }
@@ -463,5 +698,18 @@ section.item {
   }
 }
 // -----------------------------------------------/
+// -----------------------------------------------/
+// анимация ------------------------------------------\
+@keyframes hidden {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 // -----------------------------------------------/
 // Конец -----------------------------------------------/

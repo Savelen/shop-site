@@ -7,7 +7,7 @@ function addSlot(slot_info, gender = "men,women", all) {
 		let slot = document.querySelector("div.slot-item_hidden");
 		for (let i = 0; i < men.length; i++) {
 			let clone = slot.cloneNode(true);
-			clone.className = "slot_item_show";
+			clone.className = "slot-item slot-item_show";
 			// Вставляем инфу о размерах
 			let size = men[i].size.split(',');
 			let clone_el = clone.querySelector(".select-size__size-item");
@@ -25,9 +25,9 @@ function addSlot(slot_info, gender = "men,women", all) {
 				// }
 			}
 			// цвет товара
-			clone_el = clone.querySelector("div.color-item");
+			clone_el = clone.querySelector(".color-item");
 			el = document.createElement('ul');
-			el.className = "color-item__color-select";
+			el.className = "color-item__list";
 			for (let j = 0; j < men[i].color.length && j < 3; j++) {
 				let el_addition = document.createElement('li');
 				el_addition.className = "color-item__color" + (j + 1);
@@ -39,18 +39,18 @@ function addSlot(slot_info, gender = "men,women", all) {
 				} else { link.href = "#"; }
 				el_addition.appendChild(link);
 				el.appendChild(el_addition);
-				el_addition = document.createElement('span');
-				el_addition.className = "spase_li";
-				el.appendChild(el_addition);
+				// el_addition = document.createElement('span');
+				// el_addition.className = "spase_li";
+				// el.appendChild(el_addition);
 			}
 			clone_el.appendChild(el);
 			// вставляем картинку товара
-			clone_el = clone.querySelector(".men__item__image");
+			clone_el = clone.querySelector(".slot-item__image");
 			el = document.createElement('img');
 			el.src = men[i].img[0];
 			clone_el.appendChild(el);
 			// вставляем имя товара
-			clone_el = clone.querySelector(".men__name__item");
+			clone_el = clone.querySelector(".slot-item__name");
 			if (men[i].name.length > 34) {
 				let fontSize = 610 / men[i].name.length
 				clone_el.style.fontSize = fontSize + "px";
@@ -58,7 +58,7 @@ function addSlot(slot_info, gender = "men,women", all) {
 			}
 			clone_el.textContent = men[i].name;
 			// вставляем цену товара
-			clone_el = clone.querySelector('.men__cost__item');
+			clone_el = clone.querySelector('.slot-item__cost');
 			el = document.createElement('span');
 			el.textContent = '₽';
 			clone_el.textContent = men[i].cost[0] + ',' + men[i].cost[1];
@@ -67,11 +67,11 @@ function addSlot(slot_info, gender = "men,women", all) {
 		}
 	}
 	function women_slot(women, up = 1) {
-		uplevel = document.querySelectorAll('div.slot');
-		let slot = document.querySelector("div.slot-item_hidden");
+		uplevel = document.querySelectorAll('.slot');
+		let slot = document.querySelector(".slot-item_hidden");
 		for (let i = 0; i < women.length; i++) {
 			let clone = slot.cloneNode(true);
-			clone.className = "slot_item_show";
+			clone.className = "slot-item slot-item_show";
 			// Вставляем инфу о размерах
 			let size = women[i].size.split(',');
 			let clone_el = clone.querySelector(".select-size__size-item");
@@ -91,7 +91,7 @@ function addSlot(slot_info, gender = "men,women", all) {
 			// цвет товара
 			clone_el = clone.querySelector(".color-item");
 			el = document.createElement('ul');
-			el.className = "color-item__color-select";
+			el.className = "color-item__list";
 			for (let j = 0; j < women[i].color.length && j < 3; j++) {
 				let el_addition = document.createElement('li');
 				el_addition.className = "color-item__color" + (j + 1);
@@ -103,25 +103,25 @@ function addSlot(slot_info, gender = "men,women", all) {
 				} else { link.href = "#"; }
 				el_addition.appendChild(link);
 				el.appendChild(el_addition);
-				el_addition = document.createElement('span');
-				el_addition.className = "spase_li";
-				el.appendChild(el_addition);
+				// el_addition = document.createElement('span');
+				// el_addition.className = "spase_li";
+				// el.appendChild(el_addition);
 			}
 			clone_el.appendChild(el);
 			// вставляем картинку товара
-			clone_el = clone.querySelector(".men__item__image");
+			clone_el = clone.querySelector(".slot-item__image");
 			el = document.createElement('img');
 			el.src = women[i].img[0];
 			clone_el.appendChild(el);
 			// вставляем имя товара
-			clone_el = clone.querySelector(".men__name__item");
+			clone_el = clone.querySelector(".slot-item__name");
 			if (women[i].name.length > 35) {
 				let fontSize = 630 / women[i].name.length
 				clone_el.style = " font-size: " + fontSize + "px;";
 			}
 			clone_el.textContent = women[i].name;
 			// вставляем цену товара
-			clone_el = clone.querySelector('.men__cost__item');
+			clone_el = clone.querySelector('.slot-item__cost');
 			el = document.createElement('span');
 			el.textContent = '₽';
 			clone_el.textContent = women[i].cost[0] + ',' + women[i].cost[1];
@@ -142,6 +142,12 @@ function addSlot(slot_info, gender = "men,women", all) {
 		//мужской отдел
 		if (g == "men" && slot_info.length != 0) {
 			if (men.length != 0) {
+				if (men.length <= 2) {
+					document.querySelector('.men__slot').style = "justify-content: space-around;";
+				}
+				else {
+					document.querySelector('.men__slot').style = "justify-content: space-between;";
+				}
 				if (mess.length > 0) {
 					mess.forEach(m => { if (m.dataset.gender == 'men') m.parentElement.removeChild(m); });
 				}
@@ -161,6 +167,12 @@ function addSlot(slot_info, gender = "men,women", all) {
 		//женский отдел
 		if (g == "women" && slot_info.length != 0) {
 			if (women.length != 0) {
+				if (women.length <= 2) {
+					document.querySelector('.women__slot').style = "justify-content: space-around;";
+				}
+				else {
+					document.querySelector('.women__slot').style = "justify-content: space-between;";
+				}
 				if (mess.length > 0) {
 					mess.forEach(m => { if (m.dataset.gender == 'women') m.parentElement.removeChild(m); });
 				}

@@ -72,8 +72,8 @@
 			<!-- *Мужской отдел -->
 			<div class="catalog-item__men men">
 				<div class="men__header">
-					<h2 class="name">мужская</h2>
-					<div class="men__dorder"></div>
+					<h2 class="men__name">мужская</h2>
+					<div class="men__border"></div>
 				</div>
 				<div class="men__pagination pagination">
 					<span class="pagination__arrow pagination__arrow_left" data-gender="men" data-start='0' data-get="3"
@@ -85,29 +85,37 @@
 				</div>
 				<div class="men__slot slot">
 					<!-- Слот товара -->
-					<div class="men__slot-item slot-item slot-item_hidden">
-						<!-- выбор размера -->
-						<div class="slot-item__select-size select-size">
-							<select class="select-size__size-item">
-								<option disabled selected>размер</option>
-							</select>
-							<!-- ! попробовать через ::before -->
-							<!-- <span class="arrow"></span> -->
+					<div class="slot-item slot-item_hidden">
+						<div class="slot-item__header-part-slot">
+							<!-- выбор размера -->
+							<div class="slot-item__select-size select-size">
+								<select class="select-size__size-item">
+									<option disabled selected>размер</option>
+								</select>
+								<div class="select-size__arrow-bg">
+									<!-- <span class="select-size__arrow-select"></span> -->
+								</div>
+
+							</div>
+							<!-- выбор цвета -->
+							<div class="men__color-item color-item">
+							</div>
 						</div>
-						<!-- выбор цвета -->
-						<div class="men__color-item color-item">
+						<div class="slot-item__image">
 						</div>
-						<div class="men__item__image"></div>
-						<div class="men__name__item"></div>
-						<div class="men__cost__item"></div>
+						<div class="slot-item__footer-part-slot">
+							<div class="slot-item__name"></div>
+							<div class="slot-item__cost"></div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 			<!-- *Женский отдел -->
 			<div class="catalog-item__women women">
 				<div class="women__header">
-					<h2 class="name">женская</h2>
-					<div class="women__dorder"></div>
+					<div class="women__border"></div>
+					<h2 class="women__name">женская</h2>
 				</div>
 				<div class="women__pagination pagination">
 					<span class="pagination__arrow pagination__arrow_left" data-gender="women" data-start='0' data-get="3"
@@ -121,8 +129,8 @@
 			<!-- *Показ всех предметов -->
 			<div class="catalog-item__all-item all-item">
 				<div class="all-item__header">
-					<h2 class="name">все товары</h2>
-					<div class="all-item__dorder"></div>
+					<h2 class="all-item__name">все товары</h2>
+					<div class="all-item__border"></div>
 				</div>
 				<div class="all-item__slot slot"></div>
 			</div>
@@ -131,8 +139,8 @@
 
 	<section class="about">
 		<div class="about-message">
-			<h2>о нас</h2>
-			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non aut illo aliquam commodi obcaecati ex rerum,
+			<h2 class="about-message__header">о нас</h2>
+			<p class="about-message__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non aut illo aliquam commodi obcaecati ex rerum,
 				illum blanditiis dolor maiores atque est nobis asperiores vitae quos suscipit doloremque impedit ducimus,
 				veniam beatae eius eligendi, cupiditate voluptatum aperiam. Pariatur, repudiandae incidunt. Reprehenderit
 				quibusdam, delectus nostrum sapiente optio dolorem laudantium nulla iusto! Quae voluptates praesentium quis
@@ -189,35 +197,79 @@
 		down.addEventListener("click", () => document.querySelector('header').scrollIntoView({ behavior: "smooth" }));
 		// ----------------------------------------------------
 		let button = document.querySelector('.button-item__all-item');
-			button.addEventListener("click", () => {
-				let label = document.querySelector('.checkbox-item').querySelectorAll('input');
-				if (button.dataset.activ == 0) {
-					button.textContent = "скрыть все товары";
-					button.dataset.activ = 1;
+		button.addEventListener("click", () => {
+			let label = document.querySelector('.checkbox-item').querySelectorAll('input');
+			if (button.dataset.activ == 0) {
+				button.textContent = "скрыть все товары";
+				button.dataset.activ = 1;
+			}
+			else if (button.dataset.activ == 1) {
+				button.textContent = "показать все товары";
+				button.dataset.activ = 0;
+			}
+		});
+
+		// <!--* Показ и сокрытие категорий-->
+		let slot = {
+			show_slot: function () {
+				let slot = document.querySelector('.item-filter__checkbox-item').querySelectorAll('input');
+				let but = document.querySelector('.button-item__all-item');
+				let activ = {
+					'but': but.dataset.activ,
+					'checkEnable': [],
+					'checkDusable': []
 				}
-				else if (button.dataset.activ == 1) {
-					button.textContent = "показать все товары";
-					button.dataset.activ = 0;
+				slot.forEach(s => {
+					if (s.checked && s.name != 'kids') activ.checkEnable.push(s);
+					else if (!s.checked && s.name != 'kids') activ.checkDusable.push(s);
+				});
+				if (activ.but == 0 && activ.checkEnable.length != 0) {
+					document.querySelector('.catalog-item').style.display = "block";
+					document.querySelector('.catalog-item__all-item').style.display = "none";
+					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "block");
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
 				}
-			});
+				else if (activ.but == 1 && activ.checkEnable.length != 0) {
+					document.querySelector('.catalog-item').style.display = "block";
+					document.querySelector('.catalog-item__all-item').style.display = "block";
+					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+				}
+				else if (activ.checkEnable.length == 0) {
+					document.querySelector('.catalog-item').style.display = "none";
+					document.querySelector('.catalog-item__all-item').style.display = "none";
+					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
+				}
+			},
+		}
+
+
+		let s = document.querySelector('.item-filter__checkbox-item').querySelectorAll('input');
+		s.forEach(c => {
+			c.addEventListener('click', () => slot.show_slot());
+		})
+		let but = document.querySelector('.button-item__all-item');
+		but.addEventListener('click', () => slot.show_slot());
+		slot.show_slot();
 	</script>
-	<!-- <script src="js/pagination.js"></script>
+	<script src="js/pagination.js"></script>
 	<script>
-		ajax_conect("men,women", 0, 33, 0);
+		// ajax_conect("men,women", 0, 3, 0);
 		// ajax_conect("men,women", 0, 33, 1, true);
 
-		function go() {`
+		function go() {
 			let img_arr = document.querySelectorAll('li');
 			img_arr.forEach(link => {
 				link.addEventListener("click", () => {
 					let img = link.querySelector('a');
-					let up_elem = (iterac = 2) => {
+					let up_elem = (iterac = 3) => {
 						let parent_el = link.parentElement;
 						for (i = 0; i < iterac; i++) {
 							parent_el = parent_el.parentElement;
 						}
 						return parent_el;
 					}
+					console.log(up_elem());
 					let old_img = up_elem().querySelector('img');
 					old_img.addEventListener("animationend", () => {
 						old_img.style.animationName = '';
@@ -230,8 +282,8 @@
 				});
 			})
 		}
-		gp();
-	</script> -->
+		go();
+	</script>
 </body>
 
 </html>
