@@ -25,6 +25,9 @@
 				<span class="but-menu__item">Товары</span>
 				<img src="Style/Image/icon/shopping-cart.png" alt="" class="but-menu__card">
 			</div>
+			<div class="menu__bg">
+				<div class="menu__noactiv"></div>
+			</div>
 
 		</div>
 		<!-- Приветственный Текст -->
@@ -56,7 +59,7 @@
 						<span class="checkbox-item__checkmark"></span>
 						<h3 class="checkbox-item__people">женская</h3>
 					</label>
-					<label class="checkbox-item__label">
+					<label class="checkbox-item__label checkbox-item__label_kids">
 						<input type="checkbox" name="kids" class="checkbox-item__checkbox">
 						<span class="checkbox-item__checkmark"></span>
 						<h3 class="checkbox-item__people">детская</h3>
@@ -80,12 +83,12 @@
 						data-go='-3'></span>
 					<span class="pagination__text">0/0</span>
 					<span class="pagination__arrow pagination__arrow_right" data-gender="men" data-start='3' data-get="3"
-						data-go='-3'></span>
+						data-go='3'></span>
 
 				</div>
 				<div class="men__slot slot">
 					<!-- Слот товара -->
-					<div class="slot-item slot-item_hidden">
+					<div class="slot-item_hidden">
 						<div class="slot-item__header-part-slot">
 							<!-- выбор размера -->
 							<div class="slot-item__select-size select-size">
@@ -107,7 +110,6 @@
 							<div class="slot-item__name"></div>
 							<div class="slot-item__cost"></div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -140,7 +142,8 @@
 	<section class="about">
 		<div class="about-message">
 			<h2 class="about-message__header">о нас</h2>
-			<p class="about-message__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non aut illo aliquam commodi obcaecati ex rerum,
+			<p class="about-message__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non aut illo aliquam
+				commodi obcaecati ex rerum,
 				illum blanditiis dolor maiores atque est nobis asperiores vitae quos suscipit doloremque impedit ducimus,
 				veniam beatae eius eligendi, cupiditate voluptatum aperiam. Pariatur, repudiandae incidunt. Reprehenderit
 				quibusdam, delectus nostrum sapiente optio dolorem laudantium nulla iusto! Quae voluptates praesentium quis
@@ -162,16 +165,15 @@
 		<div class="footer-menu">
 			<div class="but">
 				<a href="#" class="footer-menu__link">помощь</a>
-				<span class="delimiter">|</span>
 				<a href="#" class="footer-menu__link">политика конфиденциальности</a>
-				<span class="delimiter">|</span>
 				<a href="#" class="footer-menu__link">о нас</a>
-				<span class="delimiter">|</span>
 				<a href="#" class="footer-menu__link">контакты</a>
 			</div>
 		</div>
 	</footer>
+	<!-- * Скрипты -->
 	<script>
+		//<!--* скролы -->  ----------------------------------------
 		let menu = document.querySelector('.menu_follow_false');
 		let logo = document.querySelector('.logo_follow_false');
 		let menu_but = document.querySelector('.but-menu_follow_false');
@@ -195,94 +197,50 @@
 		down.addEventListener("click", () => document.querySelector('.arrow').scrollIntoView({ behavior: "smooth" }));
 		down = document.querySelector('.but-menu__header');
 		down.addEventListener("click", () => document.querySelector('header').scrollIntoView({ behavior: "smooth" }));
+	</script>
+	<script src="js/pagination.js"></script>
+	<script src="js/travel-pagination.js"></script>
+	<script src="js/slotgeneration.js"></script>
+	<script>
+		let label = document.querySelector('div.menu-filtr').querySelectorAll('input');
+		slot.check.push(label[0], label[1], label[2]);
+		slot.add_events(slot.add_slot);
 		// ----------------------------------------------------
 		let button = document.querySelector('.button-item__all-item');
 		button.addEventListener("click", () => {
 			let label = document.querySelector('.checkbox-item').querySelectorAll('input');
 			if (button.dataset.activ == 0) {
 				button.textContent = "скрыть все товары";
+				slot.remove_events(slot.add_slot);
+				slot.add_events(slot.all_slot);
 				button.dataset.activ = 1;
+				slot.checked_box(true);
+				slot.show_slot();
 			}
 			else if (button.dataset.activ == 1) {
 				button.textContent = "показать все товары";
+				slot.remove_events(slot.all_slot);
+				slot.add_events(slot.add_slot);
 				button.dataset.activ = 0;
+				slot.checked_box(false);
+				slot.show_slot();
 			}
 		});
-
+		//<!--* Кнопка "Все товары" -->  -----------------------------
 		// <!--* Показ и сокрытие категорий-->
-		let slot = {
-			show_slot: function () {
-				let slot = document.querySelector('.item-filter__checkbox-item').querySelectorAll('input');
-				let but = document.querySelector('.button-item__all-item');
-				let activ = {
-					'but': but.dataset.activ,
-					'checkEnable': [],
-					'checkDusable': []
-				}
-				slot.forEach(s => {
-					if (s.checked && s.name != 'kids') activ.checkEnable.push(s);
-					else if (!s.checked && s.name != 'kids') activ.checkDusable.push(s);
-				});
-				if (activ.but == 0 && activ.checkEnable.length != 0) {
-					document.querySelector('.catalog-item').style.display = "block";
-					document.querySelector('.catalog-item__all-item').style.display = "none";
-					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "block");
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-				else if (activ.but == 1 && activ.checkEnable.length != 0) {
-					document.querySelector('.catalog-item').style.display = "block";
-					document.querySelector('.catalog-item__all-item').style.display = "block";
-					activ.checkEnable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-				else if (activ.checkEnable.length == 0) {
-					document.querySelector('.catalog-item').style.display = "none";
-					document.querySelector('.catalog-item__all-item').style.display = "none";
-					activ.checkDusable.forEach(c => document.querySelector('div.' + c.name).style.display = "none");
-				}
-			},
-		}
 
-
-		let s = document.querySelector('.item-filter__checkbox-item').querySelectorAll('input');
-		s.forEach(c => {
-			c.addEventListener('click', () => slot.show_slot());
-		})
-		let but = document.querySelector('.button-item__all-item');
-		but.addEventListener('click', () => slot.show_slot());
-		slot.show_slot();
 	</script>
-	<script src="js/pagination.js"></script>
+
 	<script>
 		// ajax_conect("men,women", 0, 3, 0);
-		// ajax_conect("men,women", 0, 33, 1, true);
-
-		function go() {
-			let img_arr = document.querySelectorAll('li');
-			img_arr.forEach(link => {
-				link.addEventListener("click", () => {
-					let img = link.querySelector('a');
-					let up_elem = (iterac = 3) => {
-						let parent_el = link.parentElement;
-						for (i = 0; i < iterac; i++) {
-							parent_el = parent_el.parentElement;
-						}
-						return parent_el;
-					}
-					console.log(up_elem());
-					let old_img = up_elem().querySelector('img');
-					old_img.addEventListener("animationend", () => {
-						old_img.style.animationName = '';
-					});
-					old_img.style = "animation: hidden 0.4s linear 1 forwards";
-					setTimeout(() => {
-						old_img.src = img.href;
-					}, 200);
-
-				});
-			})
-		}
-		go();
+		// let bayitem = document.querySelectorAll('.slot-item__image');
+		// bayitem.forEach(b => {
+		// 	console.log("ok");
+		// 	b.addEventListener("click", () => {
+		// 		console.log(this);
+		// 		console.log("ffffffffffffffff");
+		// 	});
+		// });
 	</script>
 </body>
 

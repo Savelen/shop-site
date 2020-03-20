@@ -11,15 +11,31 @@ $MSC: #695a37a4;
 $MFC: #f5f6f7;
 // цвет цены
 $CC: #424242;
-// цвет about границ и загдлавия
+// цвет about границ и заглавия
 $AC: #918363;
 // цвет about текст
 $AT: #424242;
+//  цвет footer фона блока с соц сетями
+$FSC: #535253;
+// цвет footer фон меню
+$FM: #424242;
+//  цвет footer разделитель |
+$FMD: #7c735f;
+// цвет footer анимации
+$FAC: #7c735f;
 
 @mixin trapezoid($h, $l, $r) {
   border-top: $h solid $MC;
   border-left: $l solid transparent;
   border-right: $r solid transparent;
+  .menu__noactiv {
+    position: absolute;
+    width: 120%;
+    pointer-events: all;
+    top: -$h;
+    left: -10%;
+    height: $h;
+  }
 }
 // ------------------------------------/
 // начало -----------------------------\
@@ -55,10 +71,13 @@ header {
   .menu {
     position: fixed;
     display: flex;
+    pointer-events: none;
     width: 100%;
     height: 13%;
     z-index: 2;
     &__but-menu {
+      pointer-events: all;
+      z-index: 2;
       position: absolute;
       top: 50%;
     }
@@ -69,13 +88,16 @@ header {
     }
     &_follow_true {
       width: 50%;
-      @include trapezoid(50px, 100px, 100px);
-      // background-color: $MC;
       justify-content: center;
       align-content: center;
       .menu__but-menu {
-        top: -35px;
+        top: 20px;
       }
+    }
+    &_follow_true .menu__bg {
+      position: absolute;
+      width: 100%;
+      @include trapezoid(50px, 100px, 100px);
     }
   }
   // Вид -----------------------------------------------\
@@ -142,8 +164,8 @@ header {
     p {
       margin-top: 2.5%;
       padding-left: 15%;
-			padding-right: 15%;
-			line-height: 1.333em;
+      padding-right: 15%;
+      line-height: 1.333em;
     }
   }
   .arrow {
@@ -254,7 +276,8 @@ section.item {
     margin-left: 7.5%;
     margin-right: 7.5%;
     margin-top: 85px;
-    margin-bottom: 85px;
+		margin-bottom: 85px;
+		display: none;
   }
   .men {
     &__header {
@@ -344,7 +367,6 @@ section.item {
     display: inline-flex;
     height: min-content;
     width: 100%;
-    height: 40px;
 
     &__arrow {
       height: 15px;
@@ -376,8 +398,8 @@ section.item {
   }
   .slot-item {
     width: 310px;
-    height: 370px;
-    margin-bottom: 25px;
+		height: 370px;
+		margin: 25px 0;
     &_hidden {
       display: none;
     }
@@ -428,7 +450,7 @@ section.item {
         font-size: 22px;
         font-weight: normal;
       }
-    }
+		}
   }
   .slot-item:hover {
     box-shadow: inset 0 0 0 6px $GC;
@@ -461,7 +483,6 @@ section.item {
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       margin-right: 5px;
-      margin-top: 2px;
     }
   }
   .color-item {
@@ -493,14 +514,14 @@ section.about {
     height: min-content;
     border: 2px solid $AC;
     &__header {
-			font-size: 1.333em;
-			text-transform: uppercase;
+      font-size: 1.333em;
+      text-transform: uppercase;
       width: 20%;
       white-space: nowrap;
-			text-align: center;
-			font-family: serif;
-			font-weight: bolder;
-			margin: -13px auto;
+      text-align: center;
+      font-family: serif;
+      font-weight: bolder;
+      margin: -13px auto;
       color: $AC;
       background-color: $GC;
     }
@@ -508,10 +529,58 @@ section.about {
     &__text {
       width: 75%;
       text-align: center;
-			margin: 5% auto;
-			color: $AT;
-			line-height: 1.333em
+      margin: 5% auto;
+      color: $AT;
+      line-height: 1.333em;
     }
+  }
+}
+// --------------------------------------------/
+// About скция--------------------------------------------\
+// footer--------------------------------------------/
+footer {
+  .soc-web {
+    width: 100%;
+    height: 70px;
+    background-color: $FSC;
+    display: flex;
+    align-items: center;
+    &__link {
+      width: 25px;
+      height: 25px;
+    }
+    &__link:first-child {
+      margin-left: 5%;
+    }
+    &__ico {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .footer-menu {
+    width: 100%;
+    height: 300px;
+    background-color: $FM;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__link {
+      width: min-content;
+      font-size: 1.075em;
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    &__link:hover {
+      color: $FAC;
+    }
+    &__link:not(:last-child)::after {
+      content: " |";
+      color: $FMD;
+    }
+  }
+  .delimiter {
+    color: $FMD;
   }
 }
 
@@ -520,16 +589,14 @@ section.about {
 // Медиазапросы -----------------------------------------\
 // Ширина -----------------------------------------------\
 @media (max-device-width: 1024px) {
-section.about {
-  .about-message {
-		width: 65%;
-    &__header {
-    }
-    &__text {
-			line-height: 1.175em
+  section.about {
+    .about-message {
+      width: 65%;
+      &__text {
+        line-height: 1.175em;
+      }
     }
   }
-}
 }
 @media (max-device-width: 768px) {
   header {
@@ -573,20 +640,45 @@ section.about {
         height: 44px;
       }
     }
-	}
-	section.about {
-  .about-message {
-		width: 85%;
-    &__header {
-			width: 30%;
+  }
+  section.about {
+    .about-message {
+      width: 85%;
+      &__header {
+        width: 30%;
+      }
     }
   }
 }
-}
 @media (max-device-width: 729px) {
   section.item {
-    .slot {
-      justify-content: center;
+    .slot-item {
+      margin: 0 auto;
+    }
+  }
+}
+@media (max-device-width: 610px) {
+  footer {
+    .footer-menu {
+      &__link:before {
+        content: "| ";
+        color: $FMD;
+      }
+      &__link:not(:last-child):after {
+        content: "";
+        margin-bottom: 5px;
+      }
+      &__link:hover {
+        animation: foothover 1s linear 100ms 1 normal forwards;
+      }
+    }
+    .but {
+      display: flex;
+      flex-direction: column;
+    }
+    .delimiter {
+      position: absolute;
+      margin-right: 5px;
     }
   }
 }
@@ -623,26 +715,32 @@ section.about {
         font-size: 0.65em;
       }
     }
-	}
-	section.about {
-  .about-message {
-		width: 95%;
-    &__header {
-    }
-    &__text {
-			font-size: 0.9em;
-			line-height: 1.14em;
-			width: 90%;
-			margin-top: 7.5%;
+  }
+  section.about {
+    .about-message {
+      width: 95%;
+      &__text {
+        font-size: 0.9em;
+        line-height: 1.14em;
+        width: 90%;
+        margin-top: 7.5%;
+      }
     }
   }
-}
+  footer {
+    .footer-menu {
+      height: 200px;
+      &__link {
+        font-size: 1em;
+      }
+    }
+  }
 }
 @media (max-device-width: 320px) {
   header {
     font-size: 0.9em;
     .menu {
-      &_follow_true {
+      &_follow_true .menu__bg {
         @include trapezoid(50px, 0, 0);
       }
     }
@@ -709,6 +807,16 @@ section.about {
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes foothover {
+  from {
+    width: 0;
+    background-color: $FMD;
+  }
+  to {
+    width: 100%;
+    background-color: $FAC;
   }
 }
 // -----------------------------------------------/

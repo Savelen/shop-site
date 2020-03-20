@@ -1,6 +1,31 @@
 function addSlot(slot_info, gender = "men,women", all) {
 	let men = [];
 	let women = [];
+	// анимация смены изображения
+	function animationChange() {
+		let img_arr = document.querySelectorAll('li');
+		img_arr.forEach(link => {
+			link.addEventListener("click", () => {
+				let img = link.querySelector('a');
+				let up_elem = (iterac = 3) => {
+					let parent_el = link.parentElement;
+					for (i = 0; i < iterac; i++) {
+						parent_el = parent_el.parentElement;
+					}
+					return parent_el;
+				}
+				let old_img = up_elem().querySelector('img');
+				old_img.addEventListener("animationend", () => {
+					old_img.style.animationName = '';
+				});
+				old_img.style = "animation: hidden 0.4s linear 1 forwards";
+				setTimeout(() => {
+					old_img.src = img.href;
+				}, 200);
+
+			});
+		})
+	}
 	// функции добавления слотов для мущин и для женжин, а также пагинации
 	function men_slot(men, up = 0) {
 		uplevel = document.querySelectorAll('div.slot');
@@ -17,12 +42,6 @@ function addSlot(slot_info, gender = "men,women", all) {
 				el.value = size[j];
 				el.text = String((size[j]));
 				clone_el.appendChild(el);
-				// проверить как будет работать без него ------------------------------
-				// if (size[j].length >= 8) {
-				// 	clone_el = clone.querySelector(".select");
-				// 	let arrow = clone_el.querySelector('span.arrow');
-				// 	arrow.style = "right: -8px";
-				// }
 			}
 			// цвет товара
 			clone_el = clone.querySelector(".color-item");
@@ -39,9 +58,6 @@ function addSlot(slot_info, gender = "men,women", all) {
 				} else { link.href = "#"; }
 				el_addition.appendChild(link);
 				el.appendChild(el_addition);
-				// el_addition = document.createElement('span');
-				// el_addition.className = "spase_li";
-				// el.appendChild(el_addition);
 			}
 			clone_el.appendChild(el);
 			// вставляем картинку товара
@@ -81,12 +97,6 @@ function addSlot(slot_info, gender = "men,women", all) {
 				el.value = size[j];
 				el.text = String((size[j]));
 				clone_el.appendChild(el);
-				// проверить как будет работать без него ------------------------------
-				// if (size[j].length >= 8) {
-				// 	clone_el = clone.querySelector(".select");
-				// 	let arrow = clone_el.querySelector('span.arrow');
-				// 	arrow.style = "right: -8px";
-				// }
 			}
 			// цвет товара
 			clone_el = clone.querySelector(".color-item");
@@ -103,9 +113,6 @@ function addSlot(slot_info, gender = "men,women", all) {
 				} else { link.href = "#"; }
 				el_addition.appendChild(link);
 				el.appendChild(el_addition);
-				// el_addition = document.createElement('span');
-				// el_addition.className = "spase_li";
-				// el.appendChild(el_addition);
 			}
 			clone_el.appendChild(el);
 			// вставляем картинку товара
@@ -190,7 +197,7 @@ function addSlot(slot_info, gender = "men,women", all) {
 		}
 	});
 	// запуск скрипта смены изображения
-	go();
+	animationChange();
 }
 function ajax_conect(gender = "men,women", start = 0, get = 3, kids = 0, all = false) {
 	let slot = new XMLHttpRequest();

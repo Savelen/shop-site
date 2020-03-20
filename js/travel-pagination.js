@@ -14,15 +14,15 @@ function count_list(now, gender, kids = 0, get = 3) {
 					let page = Math.ceil(respons[0].pagination[count] / get);
 					// вставляем итог с проверкой конечности
 					if (count == "men" && gender == 'men' || gender == "u") {
-						let p = document.querySelector('div.pagination-men');
-						let text = p.querySelector('span.text');
+						let p = document.querySelector('div.men__pagination');
+						let text = p.querySelector('span.pagination__text');
 						if ((now / get + 1) >= page) text.dataset.go = false;
 						else text.dataset.go = true;
 						text.textContent = (now / get + 1) + "/" + page;
 					}
 					if (count == "women" && gender == "women" || gender == "u") {
-						let p = document.querySelector('div.pagination-women');
-						let text = p.querySelector('span.text');
+						let p = document.querySelector('div.women__pagination');
+						let text = p.querySelector('span.pagination__text');
 						if ((now / get + 1) >= page) text.dataset.go = false;
 						else text.dataset.go = true;
 						text.textContent = (now / get + 1) + "/" + page;
@@ -30,11 +30,11 @@ function count_list(now, gender, kids = 0, get = 3) {
 					}
 				}
 			} else {
-				let p = document.querySelector('div.pagination-men');
-				let text = p.querySelector('span.text');
+				let p = document.querySelector('div.men__pagination');
+				let text = p.querySelector('span.pagination__text');
 				text.textContent = "0/0";
-				p = document.querySelector('div.pagination-women');
-				text = p.querySelector('span.text');
+				p = document.querySelector('div.women__pagination');
+				text = p.querySelector('span.pagination__text');
 				text.textContent = "0/0";
 			}
 		}
@@ -45,11 +45,11 @@ function ui_pagination(arrow, go) {
 	let arrow_two;
 	// если нажимаем стрелку вперёд
 	if (go > 0) {
-		arrow_two = arrow.parentElement.querySelector('span.arrow-left');
+		arrow_two = arrow.parentElement.querySelector('span.pagination__arrow_left');
 		// вызов до
-		if (arrow.parentElement.querySelector('span.text').dataset.go == "true") {
+		if (arrow.parentElement.querySelector('span.pagination__text').dataset.go == "true") {
 			remove_slot(arrow);
-			if (!document.querySelector('label.kids').querySelector("input").checked) {
+			if (!document.querySelector('label.checkbox-item__label_kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
 				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}
@@ -68,14 +68,14 @@ function ui_pagination(arrow, go) {
 		if (arrow.dataset.start == 0) {
 			return 0;
 		} else {
-			arrow_two = arrow.parentElement.querySelector('span.arrow-right');
+			arrow_two = arrow.parentElement.querySelector('span.pagination__arrow_right');
 			//меняем следующий номер старта
 			arrow.dataset.start = Number(arrow.dataset.start) + Number(go);
 			arrow_two.dataset.start = Number(arrow_two.dataset.start) + Number(go);
 			//вызов после
 
 			remove_slot(arrow);
-			if (!document.querySelector('label.kids').querySelector("input").checked) {
+			if (!document.querySelector('label.checkbox-item__label_kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
 				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}
@@ -87,15 +87,16 @@ function ui_pagination(arrow, go) {
 	}
 }
 function remove_slot(arrow) {
-	let parent_arrow = arrow.parentElement;
-	let slot = document.querySelector('div.' + parent_arrow.dataset.gender);
-	let remove = slot.querySelectorAll('div.slot_item');
+	// let parent_arrow = arrow.parentElement;
+	// console.log(parent_arrow);
+	let slot = document.querySelector('div.' + arrow.dataset.gender + "__slot");
+	let remove = slot.querySelectorAll('div.slot-item');
 	remove.forEach(item => slot.removeChild(item));
 }
 // запуск генерации слотов и пагинации
 let pagination = document.querySelectorAll('div.pagination');
 pagination.forEach(item => {
-	let arrow_arr = item.querySelectorAll('span.arrow');
+	let arrow_arr = item.querySelectorAll('span.pagination__arrow');
 	arrow_arr.forEach(arrow => {
 		arrow.addEventListener("click", () => {
 			ui_pagination(arrow, arrow.dataset.go);
