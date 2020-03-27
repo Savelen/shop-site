@@ -51,11 +51,11 @@ function ui_pagination(arrow, go) {
 			remove_slot(arrow);
 			if (!document.querySelector('label.checkbox-item__label_kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
-				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
+				slot_data.ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}
 			else {
 				count_list(arrow.dataset.start, arrow.dataset.gender, 1);
-				ajax_conect(arrow.dataset.gender, arrow.dataset.start, 3, 1);
+				slot_data.ajax_conect(arrow.dataset.gender, arrow.dataset.start, 3, 1);
 			}
 			//меняем следующий номер старта
 			arrow.dataset.start = Number(arrow.dataset.start) + Number(go);
@@ -77,11 +77,11 @@ function ui_pagination(arrow, go) {
 			remove_slot(arrow);
 			if (!document.querySelector('label.checkbox-item__label_kids').querySelector("input").checked) {
 				count_list(arrow.dataset.start, arrow.dataset.gender);
-				ajax_conect(arrow.dataset.gender, arrow.dataset.start);
+				slot_data.ajax_conect(arrow.dataset.gender, arrow.dataset.start);
 			}
 			else {
 				count_list(arrow.dataset.start, arrow.dataset.gender, 1);
-				ajax_conect(arrow.dataset.gender, arrow.dataset.start, 3, 1);
+				slot_data.ajax_conect(arrow.dataset.gender, arrow.dataset.start, 3, 1);
 			}
 		}
 	}

@@ -23,7 +23,7 @@
 			<div class="menu__but-menu but-menu but-menu_follow_false">
 				<span class="but-menu__header">Главная</span>
 				<span class="but-menu__item">Товары</span>
-				<img src="Style/Image/icon/shopping-cart.png" alt="" class="but-menu__card">
+				<img src="Style/Image/icon/shopping-cart.png" alt="" class="but-menu__shopping-card">
 			</div>
 			<div class="menu__bg">
 				<div class="menu__noactiv"></div>
@@ -96,7 +96,6 @@
 									<option disabled selected>размер</option>
 								</select>
 								<div class="select-size__arrow-bg">
-									<!-- <span class="select-size__arrow-select"></span> -->
 								</div>
 
 							</div>
@@ -105,6 +104,9 @@
 							</div>
 						</div>
 						<div class="slot-item__image">
+							<div class="slot-item__bay-box">
+								<button class="slot-item__bay-button">купить</button>
+							</div>
 						</div>
 						<div class="slot-item__footer-part-slot">
 							<div class="slot-item__name"></div>
@@ -135,6 +137,61 @@
 					<div class="all-item__border"></div>
 				</div>
 				<div class="all-item__slot slot"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="shopping-card">
+		<div class="select-box">
+			<div class="select-box__contain">
+				<div class="select-box__gallery gallery">
+					<div class="gallery__watch-gallery watch-gallery">
+						<div class="watch-gallery__arrow watch-gallery__arrow_left"></div>
+						<div class="watch-gallery__img-box">
+							<img src="#" alt="" class="watch-gallery__item-img">
+						</div>
+						<div class=" watch-gallery__arrow watch-gallery__arrow_right"></div>
+					</div>
+
+					<div class="gallery__color-item color-item">
+						<ul class="color-item__list">
+							<li class="color-item__color" style=""></li>
+							<li class="color-item__color" style="">
+							</li>
+							<li class="color-item__color" style="">
+							</li>
+						</ul>
+					</div>
+				</div>
+				<span class="select-box__separator"></span>
+				<div class="select-box__item-data item-data">
+					<div class="item-data__name name">
+						<h3 class="name__header">
+						</h3>
+					</div>
+					<div class="item-data__size size">
+						<h3 class="size__header">Размер:</h3>
+						<ul class="size__list">
+						</ul>
+					</div>
+					<div class="item-data__color color">
+						<h3 class="color__header">Цвет:</h3>
+						<span class="color__select" style=""></span>
+					</div>
+					<div class="item-data__description description">
+						<h3 class="description__header">Описание:</h3>
+						<p class="description__text"></p>
+					</div>
+					<div class="item-data__bay-box">
+						<div class="item-data__cost"></div>
+						<button class="item-data__bay-but">Добавить в корзиу</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bay-box">
+			<div class="bay-box__window-bay window-bay">
 			</div>
 		</div>
 	</section>
@@ -197,50 +254,46 @@
 		down.addEventListener("click", () => document.querySelector('.arrow').scrollIntoView({ behavior: "smooth" }));
 		down = document.querySelector('.but-menu__header');
 		down.addEventListener("click", () => document.querySelector('header').scrollIntoView({ behavior: "smooth" }));
+		// <!--* закрытие окон-->
+		function close_window(){
+			document.querySelector('.shopping-card').style.display = "none";
+			document.querySelector('.select-box').style.display = "none";
+			document.querySelector('.bay-box').style.display = "none";
+		}
 	</script>
-	<script src="js/pagination.js"></script>
 	<script src="js/travel-pagination.js"></script>
 	<script src="js/slotgeneration.js"></script>
 	<script>
 		let label = document.querySelector('div.menu-filtr').querySelectorAll('input');
-		slot.check.push(label[0], label[1], label[2]);
-		slot.add_events(slot.add_slot);
+		slot_data.check.push(label[0], label[1], label[2]);
+		slot_data.add_events(slot_data.add_slot);
 		// ----------------------------------------------------
 		let button = document.querySelector('.button-item__all-item');
 		button.addEventListener("click", () => {
 			let label = document.querySelector('.checkbox-item').querySelectorAll('input');
 			if (button.dataset.activ == 0) {
 				button.textContent = "скрыть все товары";
-				slot.remove_events(slot.add_slot);
-				slot.add_events(slot.all_slot);
+				slot_data.remove_events(slot_data.add_slot);
+				slot_data.add_events(slot_data.all_slot);
 				button.dataset.activ = 1;
-				slot.checked_box(true);
-				slot.show_slot();
+				slot_data.checked_box(true);
+				slot_data.show_slot();
 			}
 			else if (button.dataset.activ == 1) {
 				button.textContent = "показать все товары";
-				slot.remove_events(slot.all_slot);
-				slot.add_events(slot.add_slot);
+				slot_data.remove_events(slot_data.all_slot);
+				slot_data.add_events(slot_data.add_slot);
 				button.dataset.activ = 0;
-				slot.checked_box(false);
-				slot.show_slot();
+				slot_data.checked_box(false);
+				slot_data.show_slot();
 			}
 		});
-		//<!--* Кнопка "Все товары" -->  -----------------------------
-		// <!--* Показ и сокрытие категорий-->
-
-	</script>
-
-	<script>
-		// ajax_conect("men,women", 0, 3, 0);
-		// let bayitem = document.querySelectorAll('.slot-item__image');
-		// bayitem.forEach(b => {
-		// 	console.log("ok");
-		// 	b.addEventListener("click", () => {
-		// 		console.log(this);
-		// 		console.log("ffffffffffffffff");
-		// 	});
-		// });
+		//  -----------------------------
+		document.querySelector('.shopping-card').addEventListener("click", ()=>{
+			document.querySelector('.shopping-card').style.display = "none";
+			document.querySelector('.select-box').style.display = "none";
+			document.querySelector('.bay-box').style.display = "none";
+		});
 	</script>
 </body>
 
