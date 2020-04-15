@@ -102,7 +102,16 @@ $BT: #424242;
 body {
 	font-size: 18px;
 	font-family: myriad pro, sans-serif;
-	overflow: hidden;
+	button{
+		transform: translate(0,0);
+		transition: transform 0.1s linear;
+	}
+	button:hover{
+		transform: translate(-1px,-5px);
+	}
+	button:active{
+		transform: translate(0px,0px);
+	}
 }
 header {
 	position: relative;
@@ -547,6 +556,7 @@ section.item {
 		display: inline-flex;
 		&__size-item {
 			appearance: none;
+			background-color: #fff;
 			font-size: 0.888em;
 			font-weight: bold;
 			text-transform: uppercase;
@@ -577,8 +587,8 @@ section.item {
 // ----------------------------------------------/
 // shopping-card скция--------------------------------------------\
 section.shopping-card {
-	// display: none;
-	display: flex;
+	display: none;
+	// display: flex;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -645,7 +655,7 @@ section.shopping-card {
 		&__close {
 			position: absolute;
 			right: 0;
-			margin: -20px;
+			// margin: -20px;
 		}
 	}
 	.gallery {
@@ -856,8 +866,8 @@ section.shopping-card {
 		margin: 50px auto;
 		box-shadow: 0 0 15px 15px $GC;
 		border: 5px solid $GC;
-		// display: none;
-		display: flex;
+		display: none;
+		// display: flex;
 		&__bay-item {
 			width: 70%;
 			height: 100%;
@@ -956,12 +966,15 @@ section.shopping-card {
 		&__img-box {
 			min-width: 80px;
 			width: 10%;
-			height: 90%;
-			border: 1px solid $GC;
+			min-height: min-content;
+			height: 100%;
+			display: flex;
 		}
 		&__img {
+			margin: auto;
 			max-width: 100%;
 			max-height: 100%;
+			border: 1px solid $GC;
 		}
 		&__contain {
 			width: 80%;
@@ -983,7 +996,7 @@ section.shopping-card {
 			margin: auto;
 		}
 		&__size-box {
-			width: 15%;
+			width: 20%;
 			display: flex;
 			flex-direction: column;
 			// background-color: green;
@@ -1010,7 +1023,7 @@ section.shopping-card {
 			border-radius: 50%;
 		}
 		&__cost-box {
-			width: 30%;
+			width: 25%;
 			display: flex;
 			flex-direction: column;
 			// background-color: royalblue;
@@ -1021,8 +1034,13 @@ section.shopping-card {
 		&__cost {
 			margin-top: auto;
 		}
-		&__quantity{
+		&__quantity {
 			margin-bottom: auto;
+		}
+		&__cost-containe {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
 		}
 	}
 	.total {
@@ -1045,9 +1063,9 @@ section.shopping-card {
 			margin-top: 10px;
 		}
 		&__bay-but {
-			font-size: 1.1em;
-			width: 60%;
-			height: 65px;
+			font-size: 1em;
+			width: 70%;
+			height: 45px;
 			border-radius: 50px;
 			background-color: $BBC;
 			margin-top: 10px;
@@ -1156,6 +1174,22 @@ footer {
 			}
 		}
 	}
+	section.shopping-card {
+		.bay-box {
+			width: 95%;
+		}
+		.window-bay {
+			&__contain-el {
+				width: 95%;
+			}
+		}
+		.total {
+			font-size: 1em;
+			&__bay-but {
+				height: 45px;
+			}
+		}
+	}
 }
 @media (max-device-width: 768px) {
 	header {
@@ -1208,6 +1242,126 @@ footer {
 			}
 		}
 	}
+	section.shopping-card {
+		.bay-box {
+			width: 95%;
+			flex-direction: column-reverse;
+			&__bay-item {
+				width: 100%;
+				height: 70%;
+			}
+			&__total {
+				width: 100%;
+				height: 30%;
+				border: 0;
+			}
+			&__close {
+				top: 0;
+			}
+		}
+		.bay-el {
+			&__img-box {
+				min-width: 30%;
+				height: 100%;
+				margin-left: 5px;
+				margin-right: 3px;
+			}
+			&__contain {
+				flex-direction: column;
+				margin-top: 5%;
+				font-size: 1.1em;
+			}
+			&__name-box {
+				flex-direction: row;
+				width: 100%;
+				height: 30%;
+			}
+			&__header-name {
+				width: 20%;
+				border: 0;
+				margin: auto 0 auto;
+				text-align: right;
+			}
+			&__name {
+				margin: auto auto;
+				width: 60%;
+			}
+			&__size-box {
+				flex-direction: row;
+				width: 100%;
+				height: 15%;
+			}
+			&__size {
+				width: 65%;
+			}
+			&__header-size {
+				width: 20%;
+				border: 0;
+				margin: auto 0 auto;
+				text-align: right;
+			}
+			&__color-box {
+				flex-direction: row;
+				width: 100%;
+				height: 15%;
+			}
+			&__header-color {
+				width: 20%;
+				border: 0;
+				margin: auto 0 auto;
+				text-align: right;
+			}
+			&__color {
+				margin: auto;
+			}
+			&__cost-box {
+				flex-direction: row;
+				width: 100%;
+				height: 30%;
+			}
+			&__header-cost {
+				width: 20%;
+				border: 0;
+				margin: auto 0 auto;
+				text-align: right;
+			}
+			&__cost-containe {
+				display: flex;
+				flex-direction: column;
+				width: 65%;
+			}
+		}
+		.window-bay {
+			&__contain-el {
+				width: 99%;
+				height: 200px;
+				margin: 0;
+			}
+			&__contain-el:hover {
+				.delete {
+					animation: showDeleteM 0.5s linear 1 forwards;
+				}
+			}
+			&__delete {
+				position: absolute;
+				left: 5%;
+				opacity: 0;
+			}
+			&__bay-el {
+				width: 100%;
+			}
+			.delete {
+				width: 100%;
+				left: 0;
+			}
+		}
+		.total {
+			font-size: 1em;
+			&__bay-but {
+				height: 45px;
+			}
+		}
+	}
 }
 @media (max-device-width: 729px) {
 	section.item {
@@ -1239,6 +1393,25 @@ footer {
 		.delimiter {
 			position: absolute;
 			margin-right: 5px;
+		}
+	}
+	section.shopping-card {
+		.bay-el {
+			&__contain {
+				// font-size: 0.9em;
+			}
+			&__header-name {
+				width: 30%;
+			}
+			&__header-size {
+				width: 30%;
+			}
+			&__header-color {
+				width: 30%;
+			}
+			&__header-cost {
+				width: 30%;
+			}
 		}
 	}
 }
@@ -1292,6 +1465,25 @@ footer {
 			height: 200px;
 			&__link {
 				font-size: 1em;
+			}
+		}
+	}
+	section.shopping-card {
+		.bay-el {
+			&__contain {
+				font-size: 0.9em;
+			}
+			&__header-name {
+				width: 35%;
+			}
+			&__header-size {
+				width: 35%;
+			}
+			&__header-color {
+				width: 35%;
+			}
+			&__header-cost {
+				width: 35%;
 			}
 		}
 	}
@@ -1469,6 +1661,25 @@ footer {
 	100% {
 		opacity: 1;
 		right: 0;
+	}
+}
+@keyframes showDeleteM {
+	10% {
+		opacity: 0;
+	}
+	20% {
+		top: 0;
+		opacity: 1;
+		background-color: rgba(204, 204, 204, 0.4);
+	}
+	100% {
+		top: 65px;
+		left: 0;
+		width: 70px;
+		height: 70px;
+		opacity: 1;
+		z-index: 1;
+		background-color: rgba(204, 204, 204, 0.4);
 	}
 }
 // -----------------------------------------------/
