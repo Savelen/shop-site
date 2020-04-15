@@ -211,7 +211,7 @@ let slot_data = {
 		});
 		parent = document.querySelector('.bay-box__total');
 		parent.querySelector('.total__quantity').textContent = this.count;
-		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',');
+		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',') + "₽";
 	},
 	remove_content_select() {
 		let select = document.querySelector('.select-box');
@@ -504,7 +504,7 @@ let slot_data = {
 		if (Object.keys(obj).length == 0) this.bayList.delete(id[0]);
 		let parent = document.querySelector('.bay-box__total');
 		parent.querySelector('.total__quantity').textContent = this.count;
-		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',');
+		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',') + "₽";
 	},
 	getDataSelect: function (dsize, dcolor) {
 		let section = document.querySelector('.select-box__item-data');
