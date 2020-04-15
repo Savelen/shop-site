@@ -40,7 +40,7 @@
 		</div>
 		<!-- Стрелка в низ -->
 		<div class="arrow">
-			<sapn class="arrow__bg"></sapn><span class="arrow__down"></span>
+			<span class="arrow__bg"></span><span class="arrow__down"></span>
 		</div>
 	</header>
 
@@ -52,17 +52,17 @@
 					<label class="checkbox-item__label">
 						<input type="checkbox" name="men" class="checkbox-item__checkbox">
 						<span class="checkbox-item__checkmark"></span>
-						<h3 class="checkbox-item__people">мужская</h3>
+						мужская
 					</label>
 					<label class="checkbox-item__label">
 						<input type="checkbox" name="women" class="checkbox-item__checkbox">
 						<span class="checkbox-item__checkmark"></span>
-						<h3 class="checkbox-item__people">женская</h3>
+						женская
 					</label>
 					<label class="checkbox-item__label checkbox-item__label_kids">
 						<input type="checkbox" name="kids" class="checkbox-item__checkbox">
 						<span class="checkbox-item__checkmark"></span>
-						<h3 class="checkbox-item__people">детская</h3>
+						детская
 					</label>
 				</div>
 				<div class="item-filter__button-item button-item">
@@ -143,6 +143,12 @@
 
 	<section class="shopping-card">
 		<div class="select-box">
+			<!-- Кнопка закрыть -->
+			<div class="select-box__close close">
+				<span class="close__line"></span>
+				<span class="close__line"></span>
+			</div>
+			<!--  -->
 			<div class="select-box__contain">
 				<div class="select-box__gallery gallery">
 					<div class="gallery__watch-gallery watch-gallery">
@@ -150,49 +156,103 @@
 						<div class="watch-gallery__img-box">
 							<img src="#" alt="" class="watch-gallery__item-img">
 						</div>
-						<div class=" watch-gallery__arrow watch-gallery__arrow_right"></div>
+						<div class="watch-gallery__arrow watch-gallery__arrow_right"></div>
 					</div>
 
 					<div class="gallery__color-item color-item">
 						<ul class="color-item__list">
-							<li class="color-item__color" style=""></li>
-							<li class="color-item__color" style="">
-							</li>
-							<li class="color-item__color" style="">
-							</li>
+
 						</ul>
 					</div>
 				</div>
 				<span class="select-box__separator"></span>
 				<div class="select-box__item-data item-data">
 					<div class="item-data__name name">
-						<h3 class="name__header">
-						</h3>
+						<h3 class="name__header"></h3>
 					</div>
 					<div class="item-data__size size">
 						<h3 class="size__header">Размер:</h3>
-						<ul class="size__list">
-						</ul>
+						<ul class="size__list-size list-size"></ul>
 					</div>
 					<div class="item-data__color color">
 						<h3 class="color__header">Цвет:</h3>
-						<span class="color__select" style=""></span>
+						<ul class="color__color-item color-item">
+						</ul>
+					</div>
+					<div class="item-data__quantity quantity">
+						<h3 class="quantity__header">Колличество:</h3>
+						<input type="number" class="quantity__box" value="1" min="1" step="1">
 					</div>
 					<div class="item-data__description description">
 						<h3 class="description__header">Описание:</h3>
 						<p class="description__text"></p>
 					</div>
-					<div class="item-data__bay-box">
+					<div class="item-data__bay-section">
+						<h3 class="item-data__header-cost">Цена:</h3>
 						<div class="item-data__cost"></div>
 						<button class="item-data__bay-but">Добавить в корзиу</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="bay-box">
-			<div class="bay-box__window-bay window-bay">
+			<div class="bay-box__close close">
+				<span class="close__line"></span>
+				<span class="close__line"></span>
 			</div>
+			<div class="bay-box__bay-item">
+				<div class="bay-box__info-header info-header">
+					Корзиа
+				</div>
+				<div class="bay-box__window-card window-bay">
+					<div class="window-bay__box-el">
+						<div class="window-bay__contain-el window-bay__contain-el_hidden">
+							<div class="window-bay__bay-el bay-el">
+								<div class="bay-el__img-box">
+									<img src="#" alt="" class="bay-el__img">
+								</div>
+								<div class="bay-el__contain">
+									<div class="bay-el__name-box">
+										<h3 class="bay-el__header-name">Название:</h3>
+										<span class="bay-el__name"></span>
+									</div>
+									<div class="bay-el__size-box">
+										<h3 class="bay-el__header-size">Размер:</h3>
+										<span class="bay-el__size"></span>
+									</div>
+									<div class="bay-el__color-box">
+										<h3 class="bay-el__header-color">Цвет:</h3>
+										<span class="bay-el__color"></span>
+									</div>
+									<div class="bay-el__cost-box">
+										<h3 class="bay-el__header-cost">Цена:</h3>
+										<span class="bay-el__cost"></span>
+										<span class="bay-el__quantity">5</span>
+									</div>
+								</div>
+							</div>
+							<div class="window-bay__delete delete">
+								<span class="delete__line"></span>
+								<span class="delete__line"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bay-box__total total">
+				<h3 class="total__quantity-header">товаров в корзине
+					<span class="total__colon">:</span>
+					<span class="total__quantity"></span>
+				</h3>
+				<div class="total__total-cost total-cost">
+					<h3 class="total-cost__header">Стоимость Товаров
+						<span class="total__colon">:</span>
+						<span class="total__sum"></span>
+					</h3>
+				</div>
+				<button class="total__bay-but">Оформить товар</button>
+			</div>
+
 		</div>
 	</section>
 
@@ -254,15 +314,9 @@
 		down.addEventListener("click", () => document.querySelector('.arrow').scrollIntoView({ behavior: "smooth" }));
 		down = document.querySelector('.but-menu__header');
 		down.addEventListener("click", () => document.querySelector('header').scrollIntoView({ behavior: "smooth" }));
-		// <!--* закрытие окон-->
-		function close_window(){
-			document.querySelector('.shopping-card').style.display = "none";
-			document.querySelector('.select-box').style.display = "none";
-			document.querySelector('.bay-box').style.display = "none";
-		}
 	</script>
 	<script src="js/travel-pagination.js"></script>
-	<script src="js/slotgeneration.js"></script>
+	<script src="js/content.js"></script>
 	<script>
 		let label = document.querySelector('div.menu-filtr').querySelectorAll('input');
 		slot_data.check.push(label[0], label[1], label[2]);
@@ -288,12 +342,88 @@
 				slot_data.show_slot();
 			}
 		});
+		// Корзина -------------------------------
+		document.querySelector('.but-menu__shopping-card').addEventListener("click", () => {
+			slot_data.remove_content_select();
+			document.querySelector('body').style.overflow = 'hidden';
+			document.querySelector('.shopping-card').style.display = "block";
+			document.querySelector('.select-box').style.display = "none";
+			document.querySelector('.bay-box').style.display = "flex";
+			slot_data.fill_out_card();
+			document.querySelectorAll('.window-bay__delete').forEach(el => el.addEventListener('click', () => {
+				slot_data.removeFromCard(el.parentElement.dataset.id);
+				el.parentElement.parentElement.removeChild(el.parentElement);
+			}));
+		});
 		//  -----------------------------
-		document.querySelector('.shopping-card').addEventListener("click", ()=>{
+		function close_windov() {
+			document.querySelector('body').style.overflow = 'visible';
 			document.querySelector('.shopping-card').style.display = "none";
 			document.querySelector('.select-box').style.display = "none";
 			document.querySelector('.bay-box').style.display = "none";
+			slot_data.remove_content_select();
+		}
+		document.querySelectorAll('.close').forEach(c => c.addEventListener("click", close_windov));
+		document.querySelector('.but-menu__header').addEventListener("click", close_windov);
+		document.querySelector('.but-menu__item').addEventListener("click", close_windov);
+		// --------------------------------
+		document.querySelector('.item-data__bay-but').addEventListener('click', () => {
+			slot_data.addInCard();
 		});
+		// <!-- *Галлерея--> ----------------------------------
+		document.querySelector('.watch-gallery__arrow_right').addEventListener('click', () => {
+			let img = document.querySelector('.watch-gallery__item-img');
+			let img_url = document.querySelector('.watch-gallery__img-box').dataset.img_url.split(',');
+			let arrow_r = document.querySelector('.watch-gallery__arrow_right');
+			let arrow_l = document.querySelector('.watch-gallery__arrow_left');
+			let arr = arrow_r.dataset.id.split(",");
+			if (arr[0] < arr[1]) {
+				arrow_l.dataset.id = img.dataset.id;
+				img.dataset.id = arr[0];
+				img.src = img_url[arr[0]];
+				arr[0] = Number(arr[0]) + 1;
+				arrow_r.dataset.id = arr;
+			}
+			else {
+				let id_coll = document.querySelector('.watch-gallery__img-box');
+				let id = id_coll.dataset.id.split(',');
+				id[1] = Number(id[1]);
+				id[0] = Number(id[0]);
+				if (id[0] < id[1] - 1) {
+					id[0]++;
+					id_coll.dataset.id = [id[0], id[1]];
+					slot_data.gallery_arr(id_coll.dataset.id);
+				}
+			}
+		});
+		document.querySelector('.watch-gallery__arrow_left').addEventListener('click', () => {
+			let img = document.querySelector('.watch-gallery__item-img');
+			let img_url = document.querySelector('.watch-gallery__img-box').dataset.img_url.split(',');
+			let arrow_r = document.querySelector('.watch-gallery__arrow_right');
+			let arrow_l = document.querySelector('.watch-gallery__arrow_left');
+			let arr = arrow_r.dataset.id.split(',');
+			let id = Number(arrow_l.dataset.id);
+			if (id >= 0) {
+				img.dataset.id = id;
+				img.src = img_url[id];
+				arrow_l.dataset.id = id - 1;
+				arr[0] = Number(img.dataset.id) + 1;
+				arrow_r.dataset.id = arr;
+			}
+			else {
+				let id_coll = document.querySelector('.watch-gallery__img-box');
+				let id = id_coll.dataset.id.split(',');
+				id[1] = Number(id[1]);
+				id[0] = Number(id[0]);
+				if (id[0] != 0) {
+					id[0]--;
+					id_coll.dataset.id = [id[0], id[1]];
+					slot_data.gallery_arr(id_coll.dataset.id);
+				}
+			}
+		});
+		// <!-- *--> ----------------------------------
+
 	</script>
 </body>
 

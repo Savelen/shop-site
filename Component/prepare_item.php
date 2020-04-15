@@ -41,11 +41,11 @@ function prepare_slot($id, $gender = "men,women", $start = 0, $get = 3, $kids = 
 				'id' => $item->id,
 				'gender' => $item->gender,
 				'name' =>  $item->name,
-				// 'img' => explode(",", $item->img),
 				'img' => $item->img,
 				'size' => $item->size,
 				'cost' => get_cost($item->cost),
 				'color' => get_color($item->color),
+				"description" => $item->description
 			]);
 		}
 	}
