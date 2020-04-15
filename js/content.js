@@ -1,5 +1,6 @@
 let slot_data = {
 	data: [],
+	bayList: new Map(),
 	check: [],
 	ajax_conect: function (gender = "men,women", start = 0, get = 3, kids = 0, all = false) {
 		let data_slot = new XMLHttpRequest();
@@ -54,6 +55,7 @@ let slot_data = {
 					el_addition.style.background = data[i].color[j].rgb;
 					let link = document.createElement("a");
 					link.className = "color-link";
+					link.dataset.id = j;
 					if (data[i].img[j][0] != "") {
 						link.href = data[i].img[j][0];
 					} else { link.href = "#"; }
@@ -81,6 +83,7 @@ let slot_data = {
 				clone_el.appendChild(el);
 				uplevel[up].appendChild(clone);
 			}
+			slot_data.bay_item(uplevel[up]);
 		}
 		// сортеруем по полу
 		slot_info.forEach(el => {
@@ -142,22 +145,89 @@ let slot_data = {
 				}
 			}
 		});
-		// Ивент покупки
-
-		let bayitem = document.querySelectorAll('.slot-item__bay-button');
-		bayitem.forEach(b => {
-			b.addEventListener("click", () => {
-				document.querySelector('.shopping-card').style.display = "flex";
-				document.querySelector('.select-box').style.display = "block";
-				slot_data.ajax_get_id(b.parentElement.parentElement.parentElement.dataset.id);
-				console.log(slot_data.data);
-			});
-		});
 		// запуск скрипта смены изображения
 		this.animationChange();
 	},
-	fill_out_select: function (data) {
-
+	bay_item: function (section) {
+		let bayitem = section.querySelectorAll('.slot-item__bay-button');
+		bayitem.forEach(b => {
+			b.addEventListener("click", () => {
+				document.querySelector('body').style.overflow = 'hidden';
+				document.querySelector('.shopping-card').style.display = "flex";
+				document.querySelector('.select-box').style.display = "block";
+				slot_data.ajax_get_id(b.parentElement.parentElement.parentElement.dataset.id);
+				this.fill_out_select(
+					b.parentElement.parentElement.parentElement.querySelector('.select-size__size-item').selectedIndex,
+					b.parentElement.parentElement.querySelector('img').dataset.id
+				);
+			});
+		});
+	},
+	fill_out_select: function (size = 1, color = 0) {
+		let select = document.querySelector('.select-box__item-data');
+		select.querySelector(".name__header").textContent = this.data.name;
+		let arr = this.data.size.split(",");
+		arr.forEach(s => {
+			let el = document.createElement("li");
+			el.className = "list-size__item";
+			el.textContent = s;
+			select.querySelector(".size__list-size").appendChild(el);
+		});
+		this.data.color.forEach(s => {
+			let el = document.createElement("li");
+			el.className = "color-item__item";
+			el.dataset.id = s.id;
+			el.style.backgroundColor = s.rgb;
+			select.querySelector(".color__color-item").appendChild(el);
+		});
+		select.querySelector(".description__text").textContent = this.data.description;
+		select.querySelector(".item-data__cost")
+			.textContent = this.data.cost[0] + "," + this.data.cost[1] + "₽";
+		this.gallery_start();
+		this.getDataSelect(size, color);
+	},
+	fill_out_card: function () {
+		this.count = 0;
+		this.sum = 0;
+		let parent = document.querySelector('.window-bay__box-el');
+		let el = document.querySelector('.window-bay__contain-el_hidden');
+		this.bayList.forEach((val) => {
+			for (const key in val) {
+				if (val.hasOwnProperty(key)) {
+					let clone = el.cloneNode(true);
+					clone.className = 'window-bay__contain-el window-bay__contain-el_show';
+					clone.dataset.id = JSON.stringify({ "id": [val[key].id, key] });
+					clone.querySelector('.bay-el__img').src = val[key].img[0][0];
+					clone.querySelector('.bay-el__cost').textContent = val[key].cost[0] + ',' + val[key].cost[1] + '₽';
+					clone.querySelector('.bay-el__quantity').textContent = '(' + val[key].quantity + ' Шт.' + ')';
+					this.count += val[key].quantity;
+					this.sum += Number(val[key].cost[0] + '.' + val[key].cost[1]) * val[key].quantity;
+					clone.querySelector('.bay-el__name').textContent = val[key].name;
+					clone.querySelector('.bay-el__size').textContent = val[key].size;
+					clone.querySelector('.bay-el__color').style.background = val[key].color.rgb;
+					parent.appendChild(clone);
+				}
+			}
+		});
+		parent = document.querySelector('.bay-box__total');
+		parent.querySelector('.total__quantity').textContent = this.count;
+		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',');
+	},
+	remove_content_select() {
+		let select = document.querySelector('.select-box');
+		select.querySelectorAll("li").forEach(r => {
+			r.parentElement.removeChild(r);
+		});
+		select.querySelectorAll("img").forEach(r => {
+			r.src = "#";
+		});
+		select.querySelector(".name__header").textContent = "";
+		select.querySelector(".description__text").textContent = "";
+		select.querySelector(".item-data__cost").textContent = "";
+		document.querySelectorAll('.window-bay__contain-el_show').forEach(el => {
+			el.parentElement.removeChild(el);
+		});
+		this.data = [];
 	},
 	add_events: function (fun) {
 		slot_data.check.forEach(inp => {
@@ -352,6 +422,7 @@ let slot_data = {
 					return parent_el;
 				}
 				let old_img = up_elem().querySelector('img');
+				old_img.dataset.id = img.dataset.id;
 				old_img.addEventListener("animationend", () => {
 					old_img.style.animationName = '';
 				});
@@ -362,5 +433,127 @@ let slot_data = {
 
 			});
 		})
+	},
+	gallery_start: function () {
+		let gallery = document.querySelector('.select-box__gallery');
+		// вставка цвета
+		for (let i = 0; i < this.data.color.length; i++) {
+			let el = document.createElement("li");
+			el.style.backgroundColor = slot_data.data.color[i].rgb;
+			el.dataset.id = [i, this.data.color.length];
+			gallery.querySelector(".color-item__list").appendChild(el);
+		};
+		// вставка фото
+		this.gallery_arr([0, this.data.color.length]);
+		gallery.querySelector(".color-item__list").querySelectorAll("li").forEach(l => {
+			l.addEventListener("click", () => {
+				this.gallery_arr(l.dataset.id);
+			});
+		});
+	},
+	gallery_arr: function (id) {
+		let img_arr = this.data.img[id[0]];
+		let img = document.querySelector('.watch-gallery__item-img');
+		document.querySelector('.watch-gallery__img-box').dataset.img_url = img_arr;
+		document.querySelector('.watch-gallery__img-box').dataset.id = id;
+		img.src = img_arr[0];
+		img.dataset.id = 0;
+		let next_id = [1, img_arr.length];
+		document.querySelector('.watch-gallery__arrow_right').dataset.id = next_id;
+		document.querySelector('.watch-gallery__arrow_left').dataset.id = -1;
+	},
+	addInCard: function () {
+		if (this.bayList.has(this.data.id)) {
+			let obj = this.bayList.get(this.data.id);
+			let id = Object.keys(obj).length;
+			let k = 0;
+			for (const key in this.bayList.get(this.data.id)) {
+				if (obj[key].size != this.data.size || obj[key].color.id != this.data.color.id) {
+					id -= 1;
+				} else {
+					k = key;
+					break;
+				}
+			}
+			if (id == 0) {
+				id = Object.keys(obj).length;
+				obj[id] = JSON.parse(JSON.stringify(this.data));
+				this.bayList.set(this.data.id, obj);
+			}
+			else if (id > 0) {
+				obj[k] = JSON.parse(JSON.stringify(this.data));
+				this.bayList.set(this.data.id, obj);
+			}
+		}
+		else {
+			let obj = {
+				0: JSON.parse(JSON.stringify(this.data))
+			}
+			this.bayList.set(this.data.id, obj);
+		}
+		console.log(this.bayList);
+		console.log(this.bayList.get(this.data.id));
+	},
+	removeFromCard: function (id) {
+		id = JSON.parse(id)['id'];
+		let obj = this.bayList.get(id[0]);
+		this.count -= obj[id[1]].quantity;
+		this.sum -= Number(obj[id[1]].cost[0] + '.' + obj[id[1]].cost[1]) * obj[id[1]].quantity;
+		if (this.sum < 0) this.sum = 0;
+		delete obj[id[1]];
+		if (Object.keys(obj).length == 0) this.bayList.delete(id[0]);
+		let parent = document.querySelector('.bay-box__total');
+		parent.querySelector('.total__quantity').textContent = this.count;
+		parent.querySelector(".total__sum").textContent = String(this.sum.toFixed(2)).replace('.', ',');
+	},
+	getDataSelect: function (dsize, dcolor) {
+		let section = document.querySelector('.select-box__item-data');
+		let size = section.querySelector(".size__list-size");
+		let color = section.querySelector(".color__color-item");
+		let inp = section.querySelector('.quantity__box');
+		// defolt ---
+		this.data.color_arr = JSON.parse(JSON.stringify(this.data.color));
+		this.data.quantity = 1;
+		inp.value = 1;
+		if (dsize > 0) {
+			this.data.size = size.querySelectorAll('.list-size__item')[dsize - 1].textContent;
+			size.querySelectorAll('.list-size__item')[dsize - 1].className += ' list-size__item_select';
+		}
+		else {
+			this.data.size = size.querySelector('.list-size__item').textContent;
+			size.querySelector('.list-size__item').className += ' list-size__item_select';
+		}
+		if (color.querySelectorAll('.color-item__item')[dcolor]) {
+			this.data.color = this.data.color_arr[dcolor];
+			color.querySelectorAll('.color-item__item')[dcolor].className += ' color-item__item_select';
+		}
+		// --------
+		inp.addEventListener('focusout', () => {
+			if (inp.value > 0) {
+				this.data.quantity = Math.trunc(Number(inp.value));
+			}
+		})
+		size.querySelectorAll('.list-size__item').forEach(el => {
+			el.addEventListener("click", () => {
+				if (size.querySelector('.list-size__item_select')) {
+					size.querySelector('.list-size__item_select').className = 'list-size__item';
+				}
+				el.className = el.className + ' ' + el.className + '_select';
+				this.data.size = el.textContent;
+			});
+		});
+		color.querySelectorAll('.color-item__item').forEach(el => {
+			el.addEventListener("click", () => {
+				if (color.querySelector('.color-item__item_select')) {
+					color.querySelector('.color-item__item_select').className = 'color-item__item';
+				}
+				el.className = el.className + ' ' + el.className + '_select';
+				this.data.color_arr.forEach(c => {
+					if (c.id == el.dataset.id) {
+						this.data.color = c;
+					}
+				});
+			});
+		});
 	}
 }

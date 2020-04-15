@@ -1,7 +1,7 @@
 <?php
 try {
 	$pdo = new PDO(
-		'mysql:host=shop.com;dbname=shop_item',
+		'mysql:host=shop.sss;dbname=shop_item',
 		'root',
 		'',
 		[PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
